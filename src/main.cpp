@@ -7,7 +7,7 @@
 
 int main()
 {
-    initializeSDL();
+    Window window;
 
     entt::registry registry;
 
@@ -37,7 +37,7 @@ int main()
         }
 
         // Clear screen with background color
-        clearScreen();
+        window.clear();
 
         // Set renderer color red to draw the square
         // SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
@@ -45,11 +45,12 @@ int main()
         // Draw filled square
         // SDL_RenderFillRect(renderer, &squareRect);
 
-        updateScreen();
+        // Update screen
+        window.update();
     }
 
     // Quit game
-    destroySDL();
+    window.destroy();
 
     return 0;
 }

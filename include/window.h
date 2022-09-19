@@ -6,13 +6,29 @@
 
 #include "components.h"
 
-void drawEnemyBox(struct EnemyBox &enemy, SDL_Renderer *renderer);
-void drawEnemyBoxSDL(entt::registry &registry);
+class Window
+{
+public:
+    Window();
+    // void drawEnemyBox(struct Enemy &enemy, SDL_Renderer *renderer);
+    // void drawEnemyBoxSDL(entt::registry &registry);
 
-bool initializeSDL();
-void clearScreen();
-void updateScreen();
-void destroySDL();
-SDL_Renderer *getRenderer();
+    // Clear screen with background color
+    void clear();
+    // Update screen
+    void update();
+    // Kill and exit window
+    void destroy();
+
+    // Getters and setters
+    SDL_Window *getWindow() { return this->window; }
+    void setWindow(SDL_Window *window) { this->window = window; }
+    SDL_Renderer *getRenderer() { return this->renderer; }
+    void setRenderer(SDL_Renderer *renderer) { this->renderer = renderer; }
+
+private:
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+};
 
 #endif
