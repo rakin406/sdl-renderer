@@ -8,15 +8,15 @@ int main()
     initializeSDL();
 
     // Declare rect of square
-    SDL_Rect squareRect;
+    // SDL_Rect squareRect;
 
     // Square dimensions: Half of the min(SCREEN_WIDTH, SCREEN_HEIGHT)
-    squareRect.w = SCREEN_WIDTH / 2;
-    squareRect.h = SCREEN_HEIGHT / 2;
+    // squareRect.w = SCREEN_WIDTH / 2;
+    // squareRect.h = SCREEN_HEIGHT / 2;
 
     // Square position: In the middle of the screen
-    squareRect.x = SCREEN_WIDTH / 2 - squareRect.w / 2;
-    squareRect.y = SCREEN_HEIGHT / 2 - squareRect.h / 2;
+    // squareRect.x = SCREEN_WIDTH / 2 - squareRect.w / 2;
+    // squareRect.y = SCREEN_HEIGHT / 2 - squareRect.h / 2;
 
     // Event loop exit flag
     bool run = true;
@@ -39,10 +39,10 @@ int main()
         clearScreen();
 
         // Set renderer color red to draw the square
-        SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+        // SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
 
         // Draw filled square
-        SDL_RenderFillRect(renderer, &squareRect);
+        // SDL_RenderFillRect(renderer, &squareRect);
 
         updateScreen();
     }
