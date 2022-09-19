@@ -1,5 +1,5 @@
-#ifndef RENDER_H
-#define RENDER_H
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <SDL2/SDL.h>
 #include <entt/entt.hpp>

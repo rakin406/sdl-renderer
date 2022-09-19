@@ -3,7 +3,7 @@
 
 #include "../include/components.h"
 #include "../include/constants.h"
-#include "../include/render.h"
+#include "../include/window.h"
 
 int main()
 {

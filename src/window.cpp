@@ -2,7 +2,7 @@
 #include <entt/entt.hpp>
 
 #include "../include/constants.h"
-#include "../include/render.h"
+#include "../include/window.h"
 
 SDL_Window *window;
 SDL_Renderer *renderer;
