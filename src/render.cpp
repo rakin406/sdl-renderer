@@ -1,4 +1,4 @@
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
 
 #include "../include/constants.h"
 #include "../include/render.h"
