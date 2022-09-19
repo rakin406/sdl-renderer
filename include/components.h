@@ -3,12 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-// Size component with width and height fields
-using size = struct
-{
-    int width;
-    int height;
-};
+#include "utils.h"
 
 // Position component with x and y axis fields
 using position = struct
@@ -17,20 +12,27 @@ using position = struct
     int y;
 };
 
+// Size component with width and height fields
+using size = struct
+{
+    int width;
+    int height;
+};
+
 // Player component
 struct Player
 {
-    SDL_Rect box;
-    size size;
-    position position;
+    Circle circle;
+    position center;
+    int radius;
 };
 
 // Enemy component
 struct Enemy
 {
     SDL_Rect box;
-    size size;
     position position;
+    size size;
 };
 
 #endif
