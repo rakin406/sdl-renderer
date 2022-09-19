@@ -5,6 +5,9 @@
 
 #include "utils.h"
 
+// Radius type alias
+using radius = int32_t;
+
 // Position component with x and y axis fields
 using position = struct
 {
@@ -24,7 +27,7 @@ struct Player
 {
     Circle circle;
     position center;
-    int radius;
+    radius radius;
 };
 
 // Enemy component

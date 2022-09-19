@@ -10,13 +10,13 @@ int main()
 
     entt::registry registry;
 
-    // Create enemy box entity
-    auto enemy = registry.create();
-    auto view = registry.view<Enemy>();
-    registry.emplace<size>(enemy, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    const auto &entitySize = registry.get<size>(enemy);
-    registry.emplace<position>(enemy, SCREEN_WIDTH / 2 - entitySize.width / 2,
-                               SCREEN_HEIGHT / 2 - entitySize.height / 2);
+    // Create player entity
+    auto playerID = registry.create();
+    registry.emplace<radius>(playerID, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    const auto &playerSize = registry.get<size>(playerID);
+    registry.emplace<position>(playerID,
+                               SCREEN_WIDTH / 2 - playerSize.width / 2,
+                               SCREEN_HEIGHT / 2 - playerSize.height / 2);
 
     // Event loop exit flag
     bool run = true;
