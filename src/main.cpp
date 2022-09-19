@@ -2,23 +2,24 @@
 
 #include "../include/components.h"
 #include "../include/constants.h"
+#include "../include/playerSystem.h"
 #include "../include/window.h"
 
 int main()
 {
+    // Initialize SDL window
     Window window;
 
+    // Initialize entity manager
     entt::registry registry;
 
     // Create player entity
     auto playerID = registry.create();
-    registry.emplace<radius>(playerID, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    const auto &playerSize = registry.get<size>(playerID);
-    registry.emplace<position>(playerID,
-                               SCREEN_WIDTH / 2 - playerSize.width / 2,
-                               SCREEN_HEIGHT / 2 - playerSize.height / 2);
 
-    // Event loop exit flag
+    // Initialize player system
+    PlayerSystem player(&registry, &playerID);
+
+    // Event loop run flag
     bool run = true;
 
     // Event loop
