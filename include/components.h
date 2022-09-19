@@ -1,16 +1,16 @@
 #ifndef COMPONENTS_H
 #define COMPONENTS_H
 
-#include "vmath.h"
-
-struct EnemySize
+struct Size
 {
-    Vec2i size;
+    int width;
+    int height;
 };
 
-struct EnemyPosition
+struct Position
 {
-    Vec2i position;
+    int x;
+    int y;
 };
 
 #endif
