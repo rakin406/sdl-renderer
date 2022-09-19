@@ -1,10 +1,21 @@
 #include <SDL2/SDL.h>
+#include <entt/entt.hpp>
 
 #include "../include/constants.h"
 #include "../include/render.h"
 
 SDL_Window *window;
 SDL_Renderer *renderer;
+
+void drawEnemyBoxSDL(entt::registry &registry)
+{
+    auto spriteview = registry.view<SDL_Rect>();
+
+    for (auto et : spriteview)
+    {
+        SDL_Rect &enemy = spriteview.get(et);
+    }
+}
 
 bool initializeSDL()
 {

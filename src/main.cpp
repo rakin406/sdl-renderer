@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
-#include <entt/entity/registry.hpp>
+#include <entt/entt.hpp>
 
+#include "../include/components.h"
 #include "../include/constants.h"
 #include "../include/render.h"
 
@@ -8,16 +9,15 @@ int main()
 {
     initializeSDL();
 
-    // Declare rect of square
-    // SDL_Rect squareRect;
+    entt::registry registry;
 
-    // Square dimensions: Half of the min(SCREEN_WIDTH, SCREEN_HEIGHT)
-    // squareRect.w = SCREEN_WIDTH / 2;
-    // squareRect.h = SCREEN_HEIGHT / 2;
-
-    // Square position: In the middle of the screen
-    // squareRect.x = SCREEN_WIDTH / 2 - squareRect.w / 2;
-    // squareRect.y = SCREEN_HEIGHT / 2 - squareRect.h / 2;
+    // Create enemy box entity
+    auto enemy = registry.create();
+    auto view = registry.view<Enemy>();
+    registry.emplace<size>(enemy, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    const auto &entitySize = registry.get<size>(enemy);
+    registry.emplace<position>(enemy, SCREEN_WIDTH / 2 - entitySize.width / 2,
+                               SCREEN_HEIGHT / 2 - entitySize.height / 2);
 
     // Event loop exit flag
     bool run = true;
