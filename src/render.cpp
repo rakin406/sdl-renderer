@@ -10,7 +10,7 @@ bool initializeSDL()
 {
     SDL_Init(SDL_INIT_VIDEO);
 
-    window = SDL_CreateWindow("Avoid me", SDL_WINDOWPOS_UNDEFINED,
+    window = SDL_CreateWindow(SCREEN_TITLE, SDL_WINDOWPOS_UNDEFINED,
                               SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
                               SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
@@ -22,7 +22,15 @@ bool initializeSDL()
 
 void clearScreen()
 {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    // Background RGB color
+    int r = SCREEN_COLOR[0];
+    int g = SCREEN_COLOR[1];
+    int b = SCREEN_COLOR[2];
+
+    // Set background color
+    SDL_SetRenderDrawColor(renderer, r, g, b, SDL_ALPHA_OPAQUE);
+
+    // Clear screen
     SDL_RenderClear(renderer);
 }
 
