@@ -16,17 +16,15 @@ bool initializeSDL()
 
     renderer = SDL_CreateRenderer(
         window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if (renderer == nullptr)
-    {
-        return false;
-    }
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-
-    return true;
+    return renderer != nullptr;
 }
 
-void clearScreen() { SDL_RenderClear(renderer); }
+void clearScreen()
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_RenderClear(renderer);
+}
 
 void updateScreen() { SDL_RenderPresent(renderer); }
 

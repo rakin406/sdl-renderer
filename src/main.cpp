@@ -35,6 +35,7 @@ int main()
             run = false;
         }
 
+        // Clear screen with background color
         clearScreen();
 
         // Set renderer color red to draw the square
