@@ -2,9 +2,13 @@
 
 #include "../include/utils.h"
 
-void drawCircle(SDL_Renderer *renderer, int32_t centerX, int32_t centerY,
-                int32_t radius)
+void drawCircle(SDL_Renderer *renderer, const Circle *circle)
 {
+    // Get circle properties
+    int32_t centerX = circle->centerX;
+    int32_t centerY = circle->centerY;
+    int32_t radius = circle->radius;
+
     const int32_t diameter = (radius * 2);
 
     int32_t x = (radius - 1);

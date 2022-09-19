@@ -17,6 +17,14 @@ using position = struct
     int y;
 };
 
+// Player component
+struct Player
+{
+    SDL_Rect box;
+    size size;
+    position position;
+};
+
 // Enemy component
 struct Enemy
 {

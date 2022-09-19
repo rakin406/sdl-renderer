@@ -3,15 +3,20 @@
 
 #include <SDL2/SDL.h>
 
+// Custom circle type for SDL
+using Circle = struct
+{
+    int32_t centerX; // Center x-axis position
+    int32_t centerY; // Center y-axis position
+    int32_t radius;  // Radius of the circle
+};
+
 /**
  * Draw circle on screen.
  *
  * @param renderer SDL renderer.
- * @param centerX Center x-axis position of circle.
- * @param centerY Center y-axis position of circle.
- * @param radius Radius of circle.
+ * @param circle Circle structure.
  */
-void drawCircle(SDL_Renderer *renderer, int32_t centerX, int32_t centerY,
-                int32_t radius);
+void drawCircle(SDL_Renderer *renderer, const Circle *circle);
 
 #endif
