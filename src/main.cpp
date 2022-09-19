@@ -1,37 +1,18 @@
 #include "SDL2/SDL.h"
 
-// Define MAX and MIN macros
-#define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
-#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+#include "../include/constants.h"
+#include "../include/render.h"
 
-// Define screen dimensions
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-
-int main(int argc, char *argv[])
+int main()
 {
-    // Unused argc, argv
-    (void)argc;
-    (void)argv;
-
-    // Initialize SDL
-    SDL_Init(SDL_INIT_VIDEO);
-
-    // Create window
-    SDL_Window *window = SDL_CreateWindow("Avoid me", SDL_WINDOWPOS_UNDEFINED,
-                                          SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
-                                          SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-
-    // Create renderer
-    SDL_Renderer *renderer =
-        SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    initializeSDL();
 
     // Declare rect of square
     SDL_Rect squareRect;
 
     // Square dimensions: Half of the min(SCREEN_WIDTH, SCREEN_HEIGHT)
-    squareRect.w = MIN(SCREEN_WIDTH, SCREEN_HEIGHT) / 2;
-    squareRect.h = MIN(SCREEN_WIDTH, SCREEN_HEIGHT) / 2;
+    squareRect.w = SCREEN_WIDTH / 2;
+    squareRect.h = SCREEN_HEIGHT / 2;
 
     // Square position: In the middle of the screen
     squareRect.x = SCREEN_WIDTH / 2 - squareRect.w / 2;
@@ -54,11 +35,7 @@ int main(int argc, char *argv[])
             run = false;
         }
 
-        // Initialize renderer color white for the background
-        SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-
-        // Clear screen
-        SDL_RenderClear(renderer);
+        clearScreen();
 
         // Set renderer color red to draw the square
         SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
@@ -66,18 +43,11 @@ int main(int argc, char *argv[])
         // Draw filled square
         SDL_RenderFillRect(renderer, &squareRect);
 
-        // Update screen
-        SDL_RenderPresent(renderer);
+        updateScreen();
     }
 
-    // Destroy renderer
-    SDL_DestroyRenderer(renderer);
-
-    // Destroy window
-    SDL_DestroyWindow(window);
-
-    // Quit SDL
-    SDL_Quit();
+    // Quit game
+    destroySDL();
 
     return 0;
 }
