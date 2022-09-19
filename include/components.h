@@ -1,13 +1,13 @@
 #ifndef COMPONENTS_H
 #define COMPONENTS_H
 
-struct Size
+using size = struct
 {
     int width;
     int height;
 };
 
-struct Position
+using position = struct
 {
     int x;
     int y;
