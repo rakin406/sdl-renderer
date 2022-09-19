@@ -27,6 +27,17 @@ Window::Window()
 //     }
 // }
 
+bool Window::isQuitRequested()
+{
+    SDL_Event event;
+
+    // Wait indefinitely for the next available event
+    SDL_WaitEvent(&event);
+
+    // Return boolean
+    return event.type == SDL_QUIT;
+}
+
 void Window::clear()
 {
     // Get renderer

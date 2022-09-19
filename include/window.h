@@ -13,10 +13,15 @@ public:
     // void drawEnemyBox(struct Enemy &enemy, SDL_Renderer *renderer);
     // void drawEnemyBoxSDL(entt::registry &registry);
 
+    // Return true if user requests quit
+    bool isQuitRequested();
+
     // Clear screen with background color
     void clear();
+
     // Update screen
     void update();
+
     // Kill and exit window
     void destroy();
 

@@ -25,13 +25,8 @@ int main()
     // Event loop
     while (run)
     {
-        SDL_Event event;
-
-        // Wait indefinitely for the next available event
-        SDL_WaitEvent(&event);
-
-        // User requests quit
-        if (event.type == SDL_QUIT)
+        // Stop loop if user requests quit
+        if (window.isQuitRequested())
         {
             run = false;
         }
