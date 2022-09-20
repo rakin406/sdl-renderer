@@ -5,42 +5,20 @@
 void drawCircle(SDL_Renderer *renderer, const Circle *circle)
 {
     // Get circle properties
-    int32_t centerX = circle->centerX;
-    int32_t centerY = circle->centerY;
-    int32_t radius = circle->radius;
+    int centerX = circle->centerX;
+    int centerY = circle->centerY;
+    int radius = circle->radius;
 
-    const int32_t diameter = (radius * 2);
-
-    int32_t x = (radius - 1);
-    int32_t y = 0;
-    int32_t tx = 1;
-    int32_t ty = 1;
-    int32_t error = (tx - diameter);
-
-    while (x >= y)
+    for (int w = 0; w < radius * 2; w++)
     {
-        //  Each of the following renders an octant of the circle
-        SDL_RenderDrawPoint(renderer, centerX + x, centerY - y);
-        SDL_RenderDrawPoint(renderer, centerX + x, centerY + y);
-        SDL_RenderDrawPoint(renderer, centerX - x, centerY - y);
-        SDL_RenderDrawPoint(renderer, centerX - x, centerY + y);
-        SDL_RenderDrawPoint(renderer, centerX + y, centerY - x);
-        SDL_RenderDrawPoint(renderer, centerX + y, centerY + x);
-        SDL_RenderDrawPoint(renderer, centerX - y, centerY - x);
-        SDL_RenderDrawPoint(renderer, centerX - y, centerY + x);
-
-        if (error <= 0)
+        for (int h = 0; h < radius * 2; h++)
         {
-            ++y;
-            error += ty;
-            ty += 2;
-        }
-
-        if (error > 0)
-        {
-            --x;
-            tx += 2;
-            error += (tx - diameter);
+            int dx = radius - w; // horizontal offset
+            int dy = radius - h; // vertical offset
+            if ((dx * dx + dy * dy) <= (radius * radius))
+            {
+                SDL_RenderDrawPoint(renderer, centerX + dx, centerY + dy);
+            }
         }
     }
 }

@@ -6,9 +6,9 @@
 // Custom circle type for SDL
 using Circle = struct
 {
-    int32_t centerX; // Center x-axis position
-    int32_t centerY; // Center y-axis position
-    int32_t radius;  // Radius of the circle
+    int centerX; // Center x-axis position
+    int centerY; // Center y-axis position
+    int radius;  // Radius of the circle
 };
 
 /**
