@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <boost/uuid/uuid.hpp>
 #include <cmath>
+#include <iostream>
 #include <utility>
 
 #include "../include/components.h"
@@ -33,11 +34,11 @@ Position getMousePosition()
  *
  * @param pos1 First position
  * @param pos2 Second position.
+ * @return distance as integer.
  */
-int distance(Position pos1, Position pos2)
+int getDistance(Position pos1, Position pos2)
 {
-    double value = std::sqrt(std::pow(pos2.x - pos1.x, 2) +
-                             std::pow(pos2.y - pos1.y, 2) * 1);
+    double value = std::hypot(pos2.x - pos1.x, pos2.y - pos1.y);
     return static_cast<int>(value);
 }
 } // namespace
@@ -55,30 +56,42 @@ void PlayerSystem::update()
     boost::uuids::uuid entity = this->getEntity();
     PositionRegistry positions = this->getPositions();
 
-    Position position = positions.get(entity); // Get entity position
-    Position mousePos = getMousePosition();    // Get mouse position
-    Position difference{}; // Difference between player and mouse position
+    Position playerPos = positions.get(entity); // Get entity position
+    Position mousePos = getMousePosition();     // Get mouse position
+
+    // Distance between player and mouse position
+    int distance = getDistance(playerPos, mousePos);
+    std::cout << "Distance: " << distance << "\n"; // debugging
+
+    // Initial player speed
+    int speed = PLAYER_SPEED;
+
+    // Set speed as difference in distance for the final step
+    if (distance < speed)
+    {
+        speed = distance;
+    }
 
     // Move x-axis position
-    if (position.x > mousePos.x)
+    if (playerPos.x > mousePos.x)
     {
-        position.x -= PLAYER_SPEED;
+        playerPos.x -= speed;
     }
-    else
+    else if (playerPos.x < mousePos.x)
     {
-        position.x += PLAYER_SPEED;
+        playerPos.x += speed;
     }
 
     // Move y-axis position
-    if (position.y > mousePos.y)
+    if (playerPos.y > mousePos.y)
     {
-        position.y -= PLAYER_SPEED;
+        playerPos.y -= speed;
     }
-    else
+    else if (playerPos.y < mousePos.y)
     {
-        position.y += PLAYER_SPEED;
+        playerPos.y += speed;
     }
 
-    positions.set(entity, position); // Set entity position to mouse position
-    this->setPositions(positions);   // Update positions
+    positions.set(entity, playerPos); // Set entity position to mouse position
+    this->setPositions(positions);    // Update positions
 }
