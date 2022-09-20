@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-#include <entt/entt.hpp>
 
 #include "../include/components.h"
 #include "../include/constants.h"

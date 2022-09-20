@@ -1,5 +1,3 @@
-#include <entt/entt.hpp>
-
 #include "../include/playerSystem.h"
 #include "../include/window.h"
 
@@ -33,10 +31,10 @@ int main()
         window.clear();
 
         // Draw player entity
-        // window.drawPlayer(registry, playerID);
-        //
-        // // Update player
-        // player.update(registry, playerID);
+        window.drawPlayer(registry, playerID);
+
+        // Update player
+        player.update(registry, playerID);
 
         // Update screen
         window.update();

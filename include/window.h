@@ -2,7 +2,6 @@
 #define WINDOW_H
 
 #include <SDL2/SDL.h>
-#include <entt/entt.hpp>
 
 class Window
 {
