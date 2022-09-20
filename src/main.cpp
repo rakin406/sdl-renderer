@@ -22,7 +22,7 @@ int main()
     playerPosRegistry.set(player, playerPosition);
 
     // Initialize player system
-    PlayerSystem playerSystem(entities, playerPosRegistry);
+    PlayerSystem playerSystem(player, playerPosRegistry);
 
     // Event loop run flag
     bool run = true;

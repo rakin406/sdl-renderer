@@ -4,22 +4,22 @@
 
 #include "../include/components.h"
 #include "../include/playerSystem.h"
+#include "../include/positionRegistry.h"
 
 Position getMousePosition();
 
-PlayerSystem::PlayerSystem(EntityManager e, PositionRegistry p)
-    : entities(std::move(e)), positions(std::move(p))
+PlayerSystem::PlayerSystem(boost::uuids::uuid entity,
+                           PositionRegistry positions)
+    : entity(entity), positions(std::move(positions))
 {
 }
 
 void PlayerSystem::update()
 {
-    // Loop all entities
-    for (const auto &[key, val] : this->entities.getAll())
-    {
-        // Set entity position to mouse position
-        this->positions.set(key, getMousePosition());
-    }
+    // TODO: Do smooth movement by tweening maths or something
+    Position currentPos = this->positions.get(this->entity);
+    // Set entity position to mouse position
+    this->positions.set(this->entity, getMousePosition());
 }
 
 Position getMousePosition()

@@ -1,17 +1,18 @@
 #ifndef PLAYER_SYSTEM_H
 #define PLAYER_SYSTEM_H
 
-#include "entityManager.h"
+#include <boost/uuid/uuid.hpp>
+
 #include "positionRegistry.h"
 
 // Player logic
 class PlayerSystem
 {
 public:
-    EntityManager entities;
+    boost::uuids::uuid entity;
     PositionRegistry positions;
 
-    PlayerSystem(EntityManager e, PositionRegistry p);
+    PlayerSystem(boost::uuids::uuid entity, PositionRegistry positions);
     void update();
 };
 
