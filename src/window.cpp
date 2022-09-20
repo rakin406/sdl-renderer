@@ -20,8 +20,10 @@ Window::Window()
     // Set renderer settings
     this->setRenderer(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED));
 
-    // Set default player size
-    this->playerCircle.radius = PLAYER_RADIUS;
+    // Set default player radius
+    Circle player{};
+    player.radius = PLAYER_RADIUS;
+    this->setPlayerCircle(player);
 }
 
 bool Window::isQuitRequested()
@@ -70,14 +72,16 @@ void Window::drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem)
     SDL_SetRenderDrawColor(renderer, r, g, b, SDL_ALPHA_OPAQUE);
 
     // Get player entity position
-    Position playerPos = playerSystem.positions.get(entity);
+    Position playerPos = playerSystem.getPositions().get(entity);
 
     // Set player circle position
-    this->playerCircle.centerX = playerPos.x;
-    this->playerCircle.centerY = playerPos.y;
+    Circle player = this->getPlayerCircle();
+    player.centerX = playerPos.x;
+    player.centerY = playerPos.y;
+    this->setPlayerCircle(player);
 
     // Draw player circle
-    drawCircle(renderer, &this->playerCircle);
+    drawCircle(renderer, &player);
 }
 
 void Window::update() { SDL_RenderPresent(this->getRenderer()); }

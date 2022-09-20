@@ -7,29 +7,34 @@
 boost::uuids::uuid EntityManager::createEntity()
 {
     boost::uuids::uuid entity = boost::uuids::random_generator()();
-    this->entities[entity] = false;
+    std::map<boost::uuids::uuid, bool> entities = this->getEntities();
+    entities[entity] = false;
+    this->setEntities(entities);
     return entity;
-}
-
-std::map<boost::uuids::uuid, bool> EntityManager::getAll() const
-{
-    return this->entities;
 }
 
 void EntityManager::markPurge(boost::uuids::uuid entity)
 {
-    this->entities[entity] = true;
+    std::map<boost::uuids::uuid, bool> entities = this->getEntities();
+    entities[entity] = true;
+    this->setEntities(entities);
 }
 
 void EntityManager::purgeReady()
 {
+    // Get all entities
+    std::map<boost::uuids::uuid, bool> entities = this->getEntities();
+
     // Removes all entities that have a value of true, only called once all
     // other purges have been called.
-    for (const auto &[key, val] : this->entities)
+    for (const auto &[key, val] : entities)
     {
         if (val)
         {
-            this->entities.erase(key);
+            entities.erase(key);
         }
     }
+
+    // Set modified entities
+    this->setEntities(entities);
 }

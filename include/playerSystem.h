@@ -9,15 +9,21 @@
 class PlayerSystem
 {
 public:
-    // TODO: Make these variables private and create getters and setters for
-    // them.
+    PlayerSystem(boost::uuids::uuid entity, PositionRegistry positions);
+    void update();
+
+    // Getters and setters
+    boost::uuids::uuid getEntity() { return this->entity; }
+    void setEntity(boost::uuids::uuid entity) { this->entity = entity; }
+    PositionRegistry getPositions() { return this->positions; }
+    void setPositions(const PositionRegistry &positions)
+    {
+        this->positions = positions;
+    }
+
+private:
     boost::uuids::uuid entity;
     PositionRegistry positions;
-    Position lastMousePosition;
-
-    PlayerSystem(boost::uuids::uuid entity, PositionRegistry positions);
-    Position getMousePosition();
-    void update();
 };
 
 #endif
