@@ -1,5 +1,6 @@
 [requires]
 sdl/2.24.0
+boost/1.80.0
 
 [generators]
 cmake
