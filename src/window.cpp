@@ -18,7 +18,8 @@ Window::Window()
                                      SCREEN_HEIGHT, SDL_WINDOW_SHOWN));
 
     // Set renderer settings
-    this->setRenderer(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED));
+    this->setRenderer(SDL_CreateRenderer(
+        window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
 
     // Set default player radius
     Circle player{};
