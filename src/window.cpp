@@ -48,13 +48,11 @@ void Window::clear()
     // Get renderer
     SDL_Renderer *renderer = this->getRenderer();
 
-    // Background RGB color
-    constexpr int R = SCREEN_COLOR[0];
-    constexpr int G = SCREEN_COLOR[1];
-    constexpr int B = SCREEN_COLOR[2];
+    // Get screen color
+    const auto &[r, g, b] = SCREEN_COLOR;
 
     // Set background color
-    SDL_SetRenderDrawColor(renderer, R, G, B, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, r, g, b, SDL_ALPHA_OPAQUE);
 
     // Clear screen
     SDL_RenderClear(renderer);
@@ -65,13 +63,11 @@ void Window::drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem)
     // Get renderer
     SDL_Renderer *renderer = this->getRenderer();
 
-    // Player RGB color
-    constexpr int R = PLAYER_COLOR[0];
-    constexpr int G = PLAYER_COLOR[1];
-    constexpr int B = PLAYER_COLOR[2];
+    // Get player color
+    const auto &[r, g, b] = PLAYER_COLOR;
 
     // Set player circle color
-    SDL_SetRenderDrawColor(renderer, R, G, B, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, r, g, b, SDL_ALPHA_OPAQUE);
 
     // Get player entity position
     Position playerPos = playerSystem.positions.get(entity);

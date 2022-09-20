@@ -3,6 +3,13 @@
 
 #include <SDL2/SDL.h>
 
+struct RGB
+{
+    int red;
+    int green;
+    int blue;
+};
+
 // Custom circle type for SDL
 struct Circle
 {
