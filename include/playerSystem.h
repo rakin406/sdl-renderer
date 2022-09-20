@@ -1,17 +1,18 @@
 #ifndef PLAYER_SYSTEM_H
 #define PLAYER_SYSTEM_H
 
-#include <SDL2/SDL.h>
+#include "entityManager.h"
+#include "positionRegistry.h"
 
-#include "components.h"
-
+// Player logic
 class PlayerSystem
 {
 public:
-    explicit PlayerSystem(entt::registry &registry, auto &playerID);
-    void update(entt::registry &registry, auto &playerID);
+    EntityManager entities;
+    PositionRegistry positions;
 
-private:
+    PlayerSystem(EntityManager e, PositionRegistry p);
+    void update();
 };
 
 #endif

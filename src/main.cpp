@@ -26,9 +26,6 @@ int main()
         // Clear screen with background color
         window.clear();
 
-        // Update player
-        player.update(registry, playerID);
-
         // Update screen
         window.update();
     }
