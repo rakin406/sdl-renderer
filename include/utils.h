@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 
 // Custom circle type for SDL
-using Circle = struct
+struct Circle
 {
     int centerX; // Center x-axis position
     int centerY; // Center y-axis position
