@@ -1,7 +1,5 @@
 #include <entt/entt.hpp>
 
-#include "../include/components.h"
-#include "../include/constants.h"
 #include "../include/playerSystem.h"
 #include "../include/window.h"
 
