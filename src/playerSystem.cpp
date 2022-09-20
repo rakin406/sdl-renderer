@@ -3,6 +3,7 @@
 #include <utility>
 
 #include "../include/components.h"
+#include "../include/constants.h"
 #include "../include/playerSystem.h"
 #include "../include/positionRegistry.h"
 
@@ -27,21 +28,21 @@ void PlayerSystem::update()
     // Move x-axis position
     if (position.x > mousePos.x)
     {
-        position.x -= 1;
+        position.x -= PLAYER_SPEED;
     }
     else
     {
-        position.x += 1;
+        position.x += PLAYER_SPEED;
     }
 
     // Move y-axis position
     if (position.y > mousePos.y)
     {
-        position.y -= 1;
+        position.y -= PLAYER_SPEED;
     }
     else
     {
-        position.y += 1;
+        position.y += PLAYER_SPEED;
     }
 
     positions.set(entity, position); // Set entity position to mouse position
