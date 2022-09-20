@@ -2,21 +2,21 @@
 #define WINDOW_H
 
 #include <SDL2/SDL.h>
-
-#include "components.h"
+#include <entt/entt.hpp>
 
 class Window
 {
 public:
     Window();
-    // void drawEnemyBox(struct Enemy &enemy, SDL_Renderer *renderer);
-    // void drawEnemyBoxSDL(entt::registry &registry);
 
     // Return true if user requests quit
     bool isQuitRequested();
 
     // Clear screen with background color
     void clear();
+
+    // Draw player entity on screen
+    void drawPlayer(entt::registry &registry, auto &playerID);
 
     // Update screen
     void update();

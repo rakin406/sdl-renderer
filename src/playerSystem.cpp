@@ -4,6 +4,7 @@
 #include "../include/components.h"
 #include "../include/constants.h"
 #include "../include/playerSystem.h"
+#include "../include/utils.h"
 
 Position getMousePosition();
 
@@ -11,21 +12,24 @@ PlayerSystem::PlayerSystem(entt::registry &registry, auto &playerID)
 {
     // Set player entity components
     // TODO: Create player size constant
-    registry.emplace<Radius>(&playerID, SCREEN_WIDTH / 2);
-    registry.emplace<Position>(&playerID, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    registry.assign<Circle>(playerID);
+
+    // TODO: Clean this part
+    registry.assign<PlayerRadius>(playerID, SCREEN_WIDTH / 2);
+    registry.get<Circle>(playerID).radius =
+        registry.get<PlayerRadius>(playerID);
+
+    registry.assign<PlayerPosition>(playerID, SCREEN_WIDTH / 2,
+                                    SCREEN_HEIGHT / 2);
 }
 
-void PlayerSystem::update(entt::registry &registry)
+void PlayerSystem::update(entt::registry &registry, auto &playerID)
 {
-    auto view = registry.view<const Position, Size>();
-    // TODO: This part is hard to understand
-    for (auto entity : view)
-    {
-        // auto &vel = view.get<Position>(entity);
-        auto &vel = view.get<Circle>(entity);
-        vel.centerX = getMousePosition().x; // Set entity position
-        vel.centerY = getMousePosition().y; // Set entity position
-    }
+    Circle &player = registry.get<Circle>(playerID);
+
+    // Set entity position
+    player.centerX = getMousePosition().x;
+    player.centerY = getMousePosition().y;
 }
 
 Position getMousePosition()

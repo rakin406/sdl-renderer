@@ -32,11 +32,11 @@ int main()
         // Clear screen with background color
         window.clear();
 
-        // Set renderer color red to draw the square
-        // SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
-
-        // Draw filled square
-        // SDL_RenderFillRect(renderer, &squareRect);
+        // Draw player entity
+        // window.drawPlayer(registry, playerID);
+        //
+        // // Update player
+        // player.update(registry, playerID);
 
         // Update screen
         window.update();

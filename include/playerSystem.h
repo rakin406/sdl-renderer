@@ -10,7 +10,7 @@ class PlayerSystem
 {
 public:
     explicit PlayerSystem(entt::registry &registry, auto &playerID);
-    void update(entt::registry &registry);
+    void update(entt::registry &registry, auto &playerID);
 
 private:
 };
