@@ -11,9 +11,6 @@
 class PositionRegistry
 {
 public:
-    // Default constructor
-    PositionRegistry() = default;
-
     void set(boost::uuids::uuid entity, Position position)
     {
         this->positions[entity] = position;

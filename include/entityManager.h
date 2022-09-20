@@ -7,9 +7,6 @@
 class EntityManager
 {
 public:
-    // Default constructor
-    EntityManager() = default;
-
     // Create entity and return ID
     boost::uuids::uuid createEntity();
 
