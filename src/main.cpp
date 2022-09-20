@@ -17,7 +17,7 @@ int main()
     auto playerID = registry.create();
 
     // Initialize player system
-    PlayerSystem player(&registry, &playerID);
+    PlayerSystem player(registry, playerID);
 
     // Event loop run flag
     bool run = true;
