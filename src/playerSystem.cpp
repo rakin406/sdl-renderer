@@ -6,23 +6,13 @@
 #include "../include/playerSystem.h"
 #include "../include/positionRegistry.h"
 
-Position getMousePosition();
-
 PlayerSystem::PlayerSystem(boost::uuids::uuid entity,
                            PositionRegistry positions)
     : entity(entity), positions(std::move(positions))
 {
 }
 
-void PlayerSystem::update()
-{
-    // TODO: Do smooth movement by tweening maths or something
-    Position currentPos = this->positions.get(this->entity);
-    // Set entity position to mouse position
-    this->positions.set(this->entity, getMousePosition());
-}
-
-Position getMousePosition()
+Position PlayerSystem::getMousePosition()
 {
     Position mousePos;
 
@@ -33,4 +23,33 @@ Position getMousePosition()
     SDL_GetMouseState(&mousePos.x, &mousePos.y);
 
     return mousePos;
+}
+
+void PlayerSystem::update()
+{
+    Position position = this->positions.get(this->entity);
+    Position mousePos = this->getMousePosition();
+
+    // Move x-axis position
+    if (position.x > mousePos.x)
+    {
+        position.x -= 1;
+    }
+    else
+    {
+        position.x += 1;
+    }
+
+    // Move y-axis position
+    if (position.y > mousePos.y)
+    {
+        position.y -= 1;
+    }
+    else
+    {
+        position.y += 1;
+    }
+
+    // Set entity position to mouse position
+    this->positions.set(this->entity, position);
 }
