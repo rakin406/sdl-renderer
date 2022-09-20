@@ -46,25 +46,25 @@ void Window::clear()
     SDL_RenderClear(renderer);
 }
 
-void Window::drawPlayer(entt::registry &registry, auto &playerID)
-{
-    // Get renderer
-    SDL_Renderer *renderer = this->getRenderer();
-
-    // Player RGB color
-    const int R = PLAYER_COLOR[0];
-    const int G = PLAYER_COLOR[1];
-    const int B = PLAYER_COLOR[2];
-
-    // Set player circle color
-    SDL_SetRenderDrawColor(renderer, R, G, B, SDL_ALPHA_OPAQUE);
-
-    // Get player circle
-    Circle player = registry.get<Circle>(playerID);
-
-    // Draw player circle
-    drawCircle(renderer, &player);
-}
+// void Window::drawPlayer(entt::registry &registry, auto &playerID)
+// {
+//     // Get renderer
+//     SDL_Renderer *renderer = this->getRenderer();
+//
+//     // Player RGB color
+//     const int R = PLAYER_COLOR[0];
+//     const int G = PLAYER_COLOR[1];
+//     const int B = PLAYER_COLOR[2];
+//
+//     // Set player circle color
+//     SDL_SetRenderDrawColor(renderer, R, G, B, SDL_ALPHA_OPAQUE);
+//
+//     // Get player circle
+//     Circle player = registry.get<Circle>(playerID);
+//
+//     // Draw player circle
+//     drawCircle(renderer, &player);
+// }
 
 void Window::update() { SDL_RenderPresent(this->getRenderer()); }
 
