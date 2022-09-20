@@ -15,6 +15,7 @@ public:
     // Getters and setters
     boost::uuids::uuid getEntity() { return this->entity; }
     void setEntity(boost::uuids::uuid entity) { this->entity = entity; }
+
     PositionRegistry getPositions() { return this->positions; }
     void setPositions(const PositionRegistry &positions)
     {

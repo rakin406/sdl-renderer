@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <boost/uuid/uuid.hpp>
+#include <cmath>
 #include <utility>
 
 #include "../include/components.h"
@@ -8,6 +9,14 @@
 #include "../include/positionRegistry.h"
 
 Position getMousePosition();
+
+/**
+ * Calculate the distance between two points.
+ *
+ * @param pos1 First position
+ * @param pos2 Second position.
+ */
+int distance(Position pos1, Position pos2);
 
 PlayerSystem::PlayerSystem(boost::uuids::uuid entity,
                            const PositionRegistry &positions)
@@ -24,6 +33,7 @@ void PlayerSystem::update()
 
     Position position = positions.get(entity); // Get entity position
     Position mousePos = getMousePosition();    // Get mouse position
+    Position difference{}; // Difference between player and mouse position
 
     // Move x-axis position
     if (position.x > mousePos.x)
@@ -62,3 +72,9 @@ Position getMousePosition()
     return mousePos;
 }
 
+int distance(Position pos1, Position pos2)
+{
+    double value = std::sqrt(std::pow(pos2.x - pos1.x, 2) +
+                             std::pow(pos2.y - pos1.y, 2) * 1);
+    return static_cast<int>(value);
+}
