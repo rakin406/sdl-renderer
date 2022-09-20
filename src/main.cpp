@@ -1,19 +1,15 @@
-#include "../include/playerSystem.h"
+#include "../include/components.h"
+#include "../include/constants.h"
+#include "../include/entityManager.h"
+#include "../include/positionRegistry.h"
 #include "../include/window.h"
+
+void setup();
 
 int main()
 {
     // Initialize SDL window
     Window window;
-
-    // Initialize entity manager
-    entt::registry registry;
-
-    // Create player entity
-    auto playerID = registry.create();
-
-    // Initialize player system
-    PlayerSystem player(registry, playerID);
 
     // Event loop run flag
     bool run = true;
@@ -30,9 +26,6 @@ int main()
         // Clear screen with background color
         window.clear();
 
-        // Draw player entity
-        window.drawPlayer(registry, playerID);
-
         // Update player
         player.update(registry, playerID);
 
@@ -44,4 +37,13 @@ int main()
     window.destroy();
 
     return 0;
+}
+
+void setup()
+{
+    // Spawn player entity, and add a position component in one step
+    EntityManager player;
+    Position playerPosition = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
+    PositionRegistry playerPosRegistry;
+    playerPosRegistry.set(player.createEntity(), playerPosition);
 }

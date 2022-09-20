@@ -15,7 +15,7 @@ public:
     void clear();
 
     // Draw player entity on screen
-    void drawPlayer(entt::registry &registry, auto &playerID);
+    // void drawPlayer(entt::registry &registry, auto &playerID);
 
     // Update screen
     void update();
