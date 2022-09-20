@@ -8,7 +8,25 @@
 #include "../include/playerSystem.h"
 #include "../include/positionRegistry.h"
 
-Position getMousePosition();
+namespace
+{
+/**
+ * Get current mouse position.
+ *
+ * @return position struct.
+ */
+Position getMousePosition()
+{
+    Position mousePos{};
+
+    // Make sure we have the latest mouse state.
+    SDL_PumpEvents();
+
+    // Get mouse position
+    SDL_GetMouseState(&mousePos.x, &mousePos.y);
+
+    return mousePos;
+}
 
 /**
  * Calculate the distance between two points.
@@ -16,7 +34,13 @@ Position getMousePosition();
  * @param pos1 First position
  * @param pos2 Second position.
  */
-int distance(Position pos1, Position pos2);
+int distance(Position pos1, Position pos2)
+{
+    double value = std::sqrt(std::pow(pos2.x - pos1.x, 2) +
+                             std::pow(pos2.y - pos1.y, 2) * 1);
+    return static_cast<int>(value);
+}
+} // namespace
 
 PlayerSystem::PlayerSystem(boost::uuids::uuid entity,
                            const PositionRegistry &positions)
@@ -57,24 +81,4 @@ void PlayerSystem::update()
 
     positions.set(entity, position); // Set entity position to mouse position
     this->setPositions(positions);   // Update positions
-}
-
-Position getMousePosition()
-{
-    Position mousePos{};
-
-    // Make sure we have the latest mouse state.
-    SDL_PumpEvents();
-
-    // Get mouse position
-    SDL_GetMouseState(&mousePos.x, &mousePos.y);
-
-    return mousePos;
-}
-
-int distance(Position pos1, Position pos2)
-{
-    double value = std::sqrt(std::pow(pos2.x - pos1.x, 2) +
-                             std::pow(pos2.y - pos1.y, 2) * 1);
-    return static_cast<int>(value);
 }
