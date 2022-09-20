@@ -14,6 +14,6 @@ const std::array<int, 3> PLAYER_COLOR = {119, 221, 119};
 const std::array<int, 3> ENEMY_COLOR = {255, 105, 97};
 
 // Player radius
-const int PLAYER_RADIUS = 45;
+const int PLAYER_RADIUS = 40;
 
 #endif
