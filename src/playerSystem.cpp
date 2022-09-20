@@ -15,9 +15,17 @@ PlayerSystem::PlayerSystem(entt::registry &registry, auto &playerID)
     registry.emplace<Position>(&playerID, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 }
 
-void PlayerSystem::update(entt::registry &registry, auto &playerID)
+void PlayerSystem::update(entt::registry &registry)
 {
     auto view = registry.view<const Position, Size>();
+    // TODO: This part is hard to understand
+    for (auto entity : view)
+    {
+        // auto &vel = view.get<Position>(entity);
+        auto &vel = view.get<Circle>(entity);
+        vel.centerX = getMousePosition().x; // Set entity position
+        vel.centerY = getMousePosition().y; // Set entity position
+    }
 }
 
 Position getMousePosition()
