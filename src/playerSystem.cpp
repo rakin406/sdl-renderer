@@ -3,9 +3,7 @@
 #include <utility>
 
 #include "../include/components.h"
-#include "../include/constants.h"
 #include "../include/playerSystem.h"
-#include "../include/utils.h"
 
 Position getMousePosition();
 
@@ -14,7 +12,15 @@ PlayerSystem::PlayerSystem(EntityManager e, PositionRegistry p)
 {
 }
 
-void PlayerSystem::update() {}
+void PlayerSystem::update()
+{
+    // Loop all entities
+    for (const auto &[key, val] : this->entities.getAll())
+    {
+        // Set entity position to mouse position
+        this->positions.set(key, getMousePosition());
+    }
+}
 
 Position getMousePosition()
 {
