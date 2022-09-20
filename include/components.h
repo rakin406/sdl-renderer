@@ -7,6 +7,7 @@ using Position = struct
     int y;
 };
 
+// NOTE: This is unused
 using Size = struct
 {
     int width;

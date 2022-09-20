@@ -1,6 +1,9 @@
 #include <SDL2/SDL.h>
+#include <boost/uuid/uuid.hpp>
 
+#include "../include/components.h"
 #include "../include/constants.h"
+#include "../include/positionRegistry.h"
 #include "../include/utils.h"
 #include "../include/window.h"
 
@@ -16,6 +19,9 @@ Window::Window()
     // Set renderer settings
     this->setRenderer(SDL_CreateRenderer(
         window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
+
+    // Set default player size
+    this->playerCircle.radius = PLAYER_RADIUS;
 }
 
 bool Window::isQuitRequested()
@@ -46,25 +52,30 @@ void Window::clear()
     SDL_RenderClear(renderer);
 }
 
-// void Window::drawPlayer(entt::registry &registry, auto &playerID)
-// {
-//     // Get renderer
-//     SDL_Renderer *renderer = this->getRenderer();
-//
-//     // Player RGB color
-//     const int R = PLAYER_COLOR[0];
-//     const int G = PLAYER_COLOR[1];
-//     const int B = PLAYER_COLOR[2];
-//
-//     // Set player circle color
-//     SDL_SetRenderDrawColor(renderer, R, G, B, SDL_ALPHA_OPAQUE);
-//
-//     // Get player circle
-//     Circle player = registry.get<Circle>(playerID);
-//
-//     // Draw player circle
-//     drawCircle(renderer, &player);
-// }
+void Window::drawPlayer(boost::uuids::uuid entity,
+                        PositionRegistry playerPosRegistry)
+{
+    // Get renderer
+    SDL_Renderer *renderer = this->getRenderer();
+
+    // Player RGB color
+    const int R = PLAYER_COLOR[0];
+    const int G = PLAYER_COLOR[1];
+    const int B = PLAYER_COLOR[2];
+
+    // Set player circle color
+    SDL_SetRenderDrawColor(renderer, R, G, B, SDL_ALPHA_OPAQUE);
+
+    // Get player entity position
+    Position playerPos = playerPosRegistry.get(entity);
+
+    // Set player circle position
+    this->playerCircle.centerX = playerPos.x;
+    this->playerCircle.centerY = playerPos.y;
+
+    // Draw player circle
+    drawCircle(renderer, &this->playerCircle);
+}
 
 void Window::update() { SDL_RenderPresent(this->getRenderer()); }
 

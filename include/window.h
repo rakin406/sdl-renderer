@@ -2,10 +2,16 @@
 #define WINDOW_H
 
 #include <SDL2/SDL.h>
+#include <boost/uuid/uuid.hpp>
+
+#include "../include/positionRegistry.h"
+#include "../include/utils.h"
 
 class Window
 {
 public:
+    Circle playerCircle;
+
     Window();
 
     // Return true if user requests quit
@@ -15,7 +21,8 @@ public:
     void clear();
 
     // Draw player entity on screen
-    // void drawPlayer(entt::registry &registry, auto &playerID);
+    void drawPlayer(boost::uuids::uuid entity,
+                    PositionRegistry playerPosRegistry);
 
     // Update screen
     void update();

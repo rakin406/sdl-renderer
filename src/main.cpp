@@ -14,11 +14,15 @@ int main()
 
     // Initialize entities
     EntityManager entities;
+
+    // Set default player entity position at the center of the screen
     Position playerPosition = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
     PositionRegistry playerPosRegistry;
-    PlayerSystem playerSystem(entities, playerPosRegistry);
     boost::uuids::uuid player = entities.createEntity();
     playerPosRegistry.set(player, playerPosition);
+
+    // Initialize player system
+    PlayerSystem playerSystem(entities, playerPosRegistry);
 
     // Event loop run flag
     bool run = true;
@@ -34,6 +38,9 @@ int main()
 
         // Clear screen with background color
         window.clear();
+
+        // Draw player entity
+        window.drawPlayer(player, playerPosRegistry);
 
         // Update player system
         playerSystem.update();
