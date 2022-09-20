@@ -6,17 +6,17 @@
 #include "utils.h"
 
 // Radius type alias
-using radius = int32_t;
+using Radius = int32_t;
 
 // Position component with x and y axis fields
-using position = struct
+using Position = struct
 {
     int x;
     int y;
 };
 
 // Size component with width and height fields
-using size = struct
+using Size = struct
 {
     int width;
     int height;
@@ -26,16 +26,16 @@ using size = struct
 struct Player
 {
     Circle circle;
-    position center;
-    radius radius;
+    Position center;
+    Radius radius;
 };
 
 // Enemy component
 struct Enemy
 {
     SDL_Rect box;
-    position position;
-    size size;
+    Position position;
+    Size size;
 };
 
 #endif
