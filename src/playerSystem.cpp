@@ -9,9 +9,10 @@
 Position getMousePosition();
 
 PlayerSystem::PlayerSystem(boost::uuids::uuid entity,
-                           PositionRegistry positions)
-    : entity(entity), positions(std::move(positions))
+                           const PositionRegistry &positions)
 {
+    this->setEntity(entity);
+    this->setPositions(positions);
 }
 
 void PlayerSystem::update()

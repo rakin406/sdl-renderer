@@ -9,7 +9,7 @@
 class PlayerSystem
 {
 public:
-    PlayerSystem(boost::uuids::uuid entity, PositionRegistry positions);
+    PlayerSystem(boost::uuids::uuid entity, const PositionRegistry &positions);
     void update();
 
     // Getters and setters
