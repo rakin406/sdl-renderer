@@ -49,9 +49,9 @@ void Window::clear()
     SDL_Renderer *renderer = this->getRenderer();
 
     // Background RGB color
-    const int R = SCREEN_COLOR[0];
-    const int G = SCREEN_COLOR[1];
-    const int B = SCREEN_COLOR[2];
+    constexpr int R = SCREEN_COLOR[0];
+    constexpr int G = SCREEN_COLOR[1];
+    constexpr int B = SCREEN_COLOR[2];
 
     // Set background color
     SDL_SetRenderDrawColor(renderer, R, G, B, SDL_ALPHA_OPAQUE);
@@ -66,9 +66,9 @@ void Window::drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem)
     SDL_Renderer *renderer = this->getRenderer();
 
     // Player RGB color
-    const int R = PLAYER_COLOR[0];
-    const int G = PLAYER_COLOR[1];
-    const int B = PLAYER_COLOR[2];
+    constexpr int R = PLAYER_COLOR[0];
+    constexpr int G = PLAYER_COLOR[1];
+    constexpr int B = PLAYER_COLOR[2];
 
     // Set player circle color
     SDL_SetRenderDrawColor(renderer, R, G, B, SDL_ALPHA_OPAQUE);
