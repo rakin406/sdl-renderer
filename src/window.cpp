@@ -28,11 +28,19 @@ bool Window::isQuitRequested()
 {
     SDL_Event event;
 
-    // Wait indefinitely for the next available event
-    SDL_WaitEvent(&event);
+    // Check for events
+    while (SDL_PollEvent(&event) != 0)
+    {
+        switch (event.type)
+        {
+        case SDL_QUIT:
+            return true;
+        default:
+            break;
+        }
+    }
 
-    // Return boolean
-    return event.type == SDL_QUIT;
+    return false;
 }
 
 void Window::clear()
