@@ -1,14 +1,35 @@
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <map>
+
 #include "../include/entityManager.h"
 
-auto EntityManager::createEntity()
+boost::uuids::uuid EntityManager::createEntity()
 {
-    auto entity = this->registry.create();
-    this->registry.emplace<bool>(entity, false);
+    boost::uuids::uuid entity = boost::uuids::random_generator()();
+    this->entities[entity] = false;
     return entity;
 }
 
-auto EntityManager::getAll() {}
+std::map<boost::uuids::uuid, bool> EntityManager::getAll() const
+{
+    return this->entities;
+}
 
-void EntityManager::markPurge(auto &entity) {}
+void EntityManager::markPurge(boost::uuids::uuid entity)
+{
+    this->entities[entity] = true;
+}
 
-void EntityManager::purgeReady() {}
+void EntityManager::purgeReady()
+{
+    // Removes all entities that have a value of true, only called once all
+    // other purges have been called.
+    for (const auto &[key, val] : this->entities)
+    {
+        if (val)
+        {
+            this->entities.erase(key);
+        }
+    }
+}
