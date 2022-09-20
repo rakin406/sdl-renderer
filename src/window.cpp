@@ -3,6 +3,7 @@
 
 #include "../include/components.h"
 #include "../include/constants.h"
+#include "../include/playerSystem.h"
 #include "../include/positionRegistry.h"
 #include "../include/utils.h"
 #include "../include/window.h"
@@ -17,8 +18,7 @@ Window::Window()
                                      SCREEN_HEIGHT, SDL_WINDOW_SHOWN));
 
     // Set renderer settings
-    this->setRenderer(SDL_CreateRenderer(
-        window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
+    this->setRenderer(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED));
 
     // Set default player size
     this->playerCircle.radius = PLAYER_RADIUS;
@@ -52,8 +52,7 @@ void Window::clear()
     SDL_RenderClear(renderer);
 }
 
-void Window::drawPlayer(boost::uuids::uuid entity,
-                        PositionRegistry playerPosRegistry)
+void Window::drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem)
 {
     // Get renderer
     SDL_Renderer *renderer = this->getRenderer();
@@ -67,7 +66,7 @@ void Window::drawPlayer(boost::uuids::uuid entity,
     SDL_SetRenderDrawColor(renderer, R, G, B, SDL_ALPHA_OPAQUE);
 
     // Get player entity position
-    Position playerPos = playerPosRegistry.get(entity);
+    Position playerPos = playerSystem.positions.get(entity);
 
     // Set player circle position
     this->playerCircle.centerX = playerPos.x;

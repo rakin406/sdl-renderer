@@ -40,7 +40,7 @@ int main()
         window.clear();
 
         // Draw player entity
-        window.drawPlayer(player, playerPosRegistry);
+        window.drawPlayer(player, playerSystem);
 
         // Update player system
         playerSystem.update();

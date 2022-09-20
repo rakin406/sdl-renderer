@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 #include <boost/uuid/uuid.hpp>
 
-#include "../include/positionRegistry.h"
+#include "../include/playerSystem.h"
 #include "../include/utils.h"
 
 class Window
@@ -21,8 +21,7 @@ public:
     void clear();
 
     // Draw player entity on screen
-    void drawPlayer(boost::uuids::uuid entity,
-                    PositionRegistry playerPosRegistry);
+    void drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem);
 
     // Update screen
     void update();
