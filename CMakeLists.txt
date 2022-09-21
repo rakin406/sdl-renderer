@@ -18,8 +18,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-add_executable(${PROJECT_NAME} src/main.cpp src/entityManager.cpp
-    src/playerSystem.cpp src/window.cpp src/renderer.cpp src/utils.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/playerSystem.cpp src/window.cpp
+    src/renderer.cpp src/utils.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
 
