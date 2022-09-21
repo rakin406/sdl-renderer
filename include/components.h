@@ -7,11 +7,4 @@ struct Position
     int y;
 };
 
-// NOTE: This is unused
-struct Size
-{
-    int width;
-    int height;
-};
-
 #endif
