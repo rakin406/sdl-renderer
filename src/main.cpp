@@ -2,8 +2,8 @@
 
 #include "../include/components.h"
 #include "../include/constants.h"
-#include "../include/playerSystem.h"
 #include "../include/renderer.h"
+#include "../include/systems.h"
 #include "../include/window.h"
 
 int main()
@@ -21,6 +21,9 @@ int main()
     // of the screen.
     auto player = registry.create();
     registry.emplace<Position>(player, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+
+    // Initialize ECS systems
+    System system(&registry);
 
     // Event loop run flag
     bool run = true;
@@ -44,7 +47,7 @@ int main()
         renderer.drawEnemy();
 
         // Update player system
-        updatePlayer(registry, player);
+        system.updatePlayer(player);
 
         // Update screen
         window.update();
