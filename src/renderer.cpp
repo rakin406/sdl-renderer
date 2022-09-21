@@ -8,7 +8,11 @@
 #include "../include/renderer.h"
 #include "../include/utils.h"
 
-Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer) {}
+Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer)
+{
+    // Set default player radius
+    this->playerCircle.radius = PLAYER_RADIUS;
+}
 
 void Renderer::drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem)
 {
