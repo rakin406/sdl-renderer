@@ -13,7 +13,7 @@ static constexpr int SPEED = 20;
  *
  * @return position struct.
  */
-Position getMousePosition();
+static Position getMousePosition();
 
 void updatePlayer(entt::registry &registry, entt::entity &entity)
 {
@@ -70,7 +70,7 @@ void updatePlayer(entt::registry &registry, entt::entity &entity)
     registry.replace<Position>(entity, playerPos);
 }
 
-Position getMousePosition()
+static Position getMousePosition()
 {
     Position mousePos{};
 
