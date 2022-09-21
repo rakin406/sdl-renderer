@@ -1,10 +1,8 @@
-#include <boost/uuid/uuid.hpp>
+#include <entt/entt.hpp>
 
 #include "../include/components.h"
 #include "../include/constants.h"
-#include "../include/entityManager.h"
 #include "../include/playerSystem.h"
-#include "../include/positionRegistry.h"
 #include "../include/renderer.h"
 #include "../include/window.h"
 
@@ -16,14 +14,13 @@ int main()
     // Initialize renderer
     Renderer renderer(window.getRendererContext());
 
-    // Initialize entities
-    EntityManager entities;
+    // Initialize ECS registry
+    entt::registry registry;
 
-    // Set default player entity position at the center of the screen
-    Position playerPosition = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
-    PositionRegistry playerPosRegistry;
-    boost::uuids::uuid player = entities.createEntity();
-    playerPosRegistry.set(player, playerPosition);
+    // Create player entity and set default player entity position at the center
+    // of the screen.
+    auto player = registry.create();
+    registry.emplace<Position>(player, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
     // Initialize player system
     PlayerSystem playerSystem(player, playerPosRegistry);
