@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 
+#include "../include/components.h"
 #include "../include/utils.h"
 
 void setRenderColor(SDL_Renderer *renderer, const RGB &color)
@@ -27,4 +28,17 @@ void drawCircle(SDL_Renderer *renderer, const Circle *circle)
             }
         }
     }
+}
+
+void drawTriangle(SDL_Renderer *renderer, const Triangle *triangle)
+{
+    // Get triangle properties
+    Position point1 = triangle->point1;
+    Position point2 = triangle->point2;
+    Position point3 = triangle->point3;
+
+    // Draw line up to points
+    SDL_RenderDrawLine(renderer, point1.x, point1.y, point3.x, point3.y);
+    SDL_RenderDrawLine(renderer, point2.x, point2.y, point3.x, point3.y);
+    SDL_RenderDrawLine(renderer, point1.x, point1.y, point2.x, point2.y);
 }

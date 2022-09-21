@@ -40,6 +40,9 @@ int main()
         // Draw player entity
         renderer.drawPlayer(registry, player);
 
+        // Draw enemy entity
+        renderer.drawEnemy();
+
         // Update player system
         updatePlayer(registry, player);
 

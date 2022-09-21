@@ -14,10 +14,14 @@ public:
     // Draw player entity on screen
     void drawPlayer(entt::registry &registry, entt::entity &entity);
 
+    // Draw enemy entity on screen
+    void drawEnemy();
+
 private:
     constexpr static int PLAYER_RADIUS = 40;
     SDL_Renderer *renderer = nullptr;
     Circle playerCircle{};
+    Triangle enemyTriangle{};
 };
 
 #endif

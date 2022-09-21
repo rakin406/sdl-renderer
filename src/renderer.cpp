@@ -27,3 +27,20 @@ void Renderer::drawPlayer(entt::registry &registry, entt::entity &entity)
     // Draw player circle
     drawCircle(this->renderer, &this->playerCircle);
 }
+
+void Renderer::drawEnemy()
+{
+    // Set enemy circle color
+    setRenderColor(this->renderer, ENEMY_COLOR);
+
+    // Get player entity position
+    // auto &pos = registry.get<Position>(entity);
+
+    // Set player circle position
+    this->enemyTriangle.point1 = {100, 300};
+    this->enemyTriangle.point2 = {300, 300};
+    this->enemyTriangle.point3 = {150, 100};
+
+    // Draw player circle
+    drawTriangle(this->renderer, &this->enemyTriangle);
+}
