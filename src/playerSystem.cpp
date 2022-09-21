@@ -2,10 +2,8 @@
 #include <cmath>
 #include <cstdlib>
 #include <entt/entt.hpp>
-#include <utility>
 
 #include "../include/components.h"
-#include "../include/constants.h"
 #include "../include/playerSystem.h"
 
 constexpr static int SPEED = 20;

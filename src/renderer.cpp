@@ -3,9 +3,7 @@
 
 #include "../include/components.h"
 #include "../include/constants.h"
-#include "../include/playerSystem.h"
 #include "../include/renderer.h"
-#include "../include/utils.h"
 
 Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer)
 {
