@@ -9,22 +9,16 @@
 #include "../include/window.h"
 
 Window::Window()
+    : window(SDL_CreateWindow(SCREEN_TITLE, SDL_WINDOWPOS_UNDEFINED,
+                              SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
+                              SCREEN_HEIGHT, SDL_WINDOW_SHOWN)),
+      renderer(SDL_CreateRenderer(
+          window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC))
 {
     SDL_Init(SDL_INIT_VIDEO);
 
-    // Set window settings
-    this->setWindow(SDL_CreateWindow(SCREEN_TITLE, SDL_WINDOWPOS_UNDEFINED,
-                                     SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
-                                     SCREEN_HEIGHT, SDL_WINDOW_SHOWN));
-
-    // Set renderer settings
-    this->setRenderer(SDL_CreateRenderer(
-        window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
-
     // Set default player radius
-    Circle player{};
-    player.radius = PLAYER_RADIUS;
-    this->setPlayerCircle(player);
+    this->playerCircle.radius = PLAYER_RADIUS;
 }
 
 bool Window::isQuitRequested()
@@ -48,48 +42,40 @@ bool Window::isQuitRequested()
 
 void Window::clear()
 {
-    // Get renderer
-    SDL_Renderer *renderer = this->getRenderer();
-
     // Get screen color
     const auto &[r, g, b] = SCREEN_COLOR;
 
     // Set background color
-    SDL_SetRenderDrawColor(renderer, r, g, b, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(this->renderer, r, g, b, SDL_ALPHA_OPAQUE);
 
     // Clear screen
-    SDL_RenderClear(renderer);
+    SDL_RenderClear(this->renderer);
 }
 
 void Window::drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem)
 {
-    // Get renderer
-    SDL_Renderer *renderer = this->getRenderer();
-
     // Get player color
     const auto &[r, g, b] = PLAYER_COLOR;
 
     // Set player circle color
-    SDL_SetRenderDrawColor(renderer, r, g, b, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(this->renderer, r, g, b, SDL_ALPHA_OPAQUE);
 
     // Get player entity position
     Position playerPos = playerSystem.getPositions().get(entity);
 
     // Set player circle position
-    Circle player = this->getPlayerCircle();
-    player.centerX = playerPos.x;
-    player.centerY = playerPos.y;
-    this->setPlayerCircle(player);
+    this->playerCircle.centerX = playerPos.x;
+    this->playerCircle.centerY = playerPos.y;
 
     // Draw player circle
-    drawCircle(renderer, &player);
+    drawCircle(this->renderer, &this->playerCircle);
 }
 
-void Window::update() { SDL_RenderPresent(this->getRenderer()); }
+void Window::update() { SDL_RenderPresent(this->renderer); }
 
 void Window::destroy()
 {
-    SDL_DestroyRenderer(this->getRenderer());
-    SDL_DestroyWindow(this->getWindow());
+    SDL_DestroyRenderer(this->renderer);
+    SDL_DestroyWindow(this->window);
     SDL_Quit();
 }

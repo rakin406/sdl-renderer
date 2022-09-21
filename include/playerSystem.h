@@ -9,18 +9,12 @@
 class PlayerSystem
 {
 public:
-    PlayerSystem(boost::uuids::uuid entity, const PositionRegistry &positions);
+    PlayerSystem(boost::uuids::uuid entity, PositionRegistry positions);
     void update();
 
-    // Getters and setters
+    // Getters
     boost::uuids::uuid getEntity() { return this->entity; }
-    void setEntity(boost::uuids::uuid entity) { this->entity = entity; }
-
     PositionRegistry getPositions() { return this->positions; }
-    void setPositions(const PositionRegistry &positions)
-    {
-        this->positions = positions;
-    }
 
 private:
     boost::uuids::uuid entity{};

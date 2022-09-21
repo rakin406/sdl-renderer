@@ -8,29 +8,23 @@
 #include "../include/renderer.h"
 #include "../include/utils.h"
 
-Renderer::Renderer(SDL_Renderer *renderer) { this->setRenderer(renderer); }
+Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer) {}
 
 void Renderer::drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem)
 {
-    // Get renderer
-    SDL_Renderer *renderer = this->getRenderer();
-
     // Get player color
     const auto &[r, g, b] = PLAYER_COLOR;
 
     // Set player circle color
-    SDL_SetRenderDrawColor(renderer, r, g, b, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(this->renderer, r, g, b, SDL_ALPHA_OPAQUE);
 
     // Get player entity position
     Position playerPos = playerSystem.getPositions().get(entity);
 
     // Set player circle position
-    // TODO: Remove circle
-    Circle player = this->getPlayerCircle();
-    player.centerX = playerPos.x;
-    player.centerY = playerPos.y;
-    this->setPlayerCircle(player);
+    this->playerCircle.centerX = playerPos.x;
+    this->playerCircle.centerY = playerPos.y;
 
     // Draw player circle
-    drawCircle(renderer, &player);
+    drawCircle(this->renderer, &this->playerCircle);
 }

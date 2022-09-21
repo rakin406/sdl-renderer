@@ -16,13 +16,6 @@ public:
     // Purge entity that is true
     void purgeReady();
 
-    // Getters and setters
-    std::map<boost::uuids::uuid, bool> getEntities() { return this->entities; }
-    void setEntities(const std::map<boost::uuids::uuid, bool> &entities)
-    {
-        this->entities = entities;
-    }
-
 private:
     // A map containing entity ID and boolean
     std::map<boost::uuids::uuid, bool> entities{};

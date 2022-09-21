@@ -27,13 +27,8 @@ public:
     // Kill and exit window
     void destroy();
 
-    // Getters and setters
-    SDL_Window *getWindow() { return this->window; }
-    void setWindow(SDL_Window *window) { this->window = window; }
+    // Getter
     SDL_Renderer *getRenderer() { return this->renderer; }
-    void setRenderer(SDL_Renderer *renderer) { this->renderer = renderer; }
-    Circle getPlayerCircle() { return this->playerCircle; }
-    void setPlayerCircle(Circle circle) { this->playerCircle = circle; }
 
 private:
     SDL_Window *window = nullptr;

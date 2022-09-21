@@ -31,20 +31,15 @@ Position getMousePosition()
 } // namespace
 
 PlayerSystem::PlayerSystem(boost::uuids::uuid entity,
-                           const PositionRegistry &positions)
+                           PositionRegistry positions)
+    : entity(entity), positions(std::move(positions))
 {
-    this->setEntity(entity);
-    this->setPositions(positions);
 }
 
 void PlayerSystem::update()
 {
-    // Get entity and position registry
-    boost::uuids::uuid entity = this->getEntity();
-    PositionRegistry positions = this->getPositions();
-
     // Get entity and mouse positions
-    Position playerPos = positions.get(entity);
+    Position playerPos = this->positions.get(this->entity);
     Position mousePos = getMousePosition();
 
     // Distance between player and mouse position
@@ -87,6 +82,6 @@ void PlayerSystem::update()
         playerPos.y += speedY;
     }
 
-    positions.set(entity, playerPos); // Set entity position to mouse position
-    this->setPositions(positions);    // Update positions
+    // Update position
+    this->positions.set(entity, playerPos);
 }
