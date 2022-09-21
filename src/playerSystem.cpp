@@ -6,7 +6,7 @@
 #include "../include/components.h"
 #include "../include/playerSystem.h"
 
-constexpr static int SPEED = 20;
+static constexpr int SPEED = 20;
 
 /**
  * Get current mouse position.

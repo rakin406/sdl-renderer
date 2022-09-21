@@ -6,6 +6,10 @@
 #include "../include/renderer.h"
 #include "../include/utils.h"
 
+// TODO: Move or remove this
+// Equilateral triangle side length for enemy entity
+static constexpr int TRIANGLE_SIDE_LENGTH = 5;
+
 Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer)
 {
     // Set default player radius
@@ -30,17 +34,17 @@ void Renderer::drawPlayer(entt::registry &registry, entt::entity &entity)
 
 void Renderer::drawEnemy()
 {
-    // Set enemy circle color
+    // Set enemy triangle color
     setRenderColor(this->renderer, ENEMY_COLOR);
 
-    // Get player entity position
+    // Get enemy entity position
     // auto &pos = registry.get<Position>(entity);
 
-    // Set player circle position
+    // Set enemy triangle position
     this->enemyTriangle.point1 = {100, 300};
-    this->enemyTriangle.point2 = {300, 300};
-    this->enemyTriangle.point3 = {150, 100};
+    this->enemyTriangle.point2 = {100, 300};
+    this->enemyTriangle.point3 = {300, 100};
 
-    // Draw player circle
+    // Draw enemy triangle
     drawTriangle(this->renderer, &this->enemyTriangle);
 }

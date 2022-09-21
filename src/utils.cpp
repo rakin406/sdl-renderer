@@ -38,7 +38,7 @@ void drawTriangle(SDL_Renderer *renderer, const Triangle *triangle)
     Position point3 = triangle->point3;
 
     // Draw line up to points
-    SDL_RenderDrawLine(renderer, point1.x, point1.y, point3.x, point3.y);
-    SDL_RenderDrawLine(renderer, point2.x, point2.y, point3.x, point3.y);
     SDL_RenderDrawLine(renderer, point1.x, point1.y, point2.x, point2.y);
+    SDL_RenderDrawLine(renderer, point2.x, point2.y, point3.x, point3.y);
+    SDL_RenderDrawLine(renderer, point3.x, point3.y, point1.x, point1.y);
 }

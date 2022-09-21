@@ -18,7 +18,7 @@ public:
     void drawEnemy();
 
 private:
-    constexpr static int PLAYER_RADIUS = 40;
+    static constexpr int PLAYER_RADIUS = 40;
     SDL_Renderer *renderer = nullptr;
     Circle playerCircle{};
     Triangle enemyTriangle{};
