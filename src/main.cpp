@@ -39,11 +39,15 @@ int main()
         // Clear screen with background color
         window.clear();
 
-        // Draw player entity
-        window.drawPlayer(player, playerSystem);
+        // Don't draw or update player if it's null
+        if (!player.is_nil() || !playerSystem.getEntity().is_nil())
+        {
+            // Draw player entity
+            window.drawPlayer(player, playerSystem);
 
-        // Update player system
-        playerSystem.update();
+            // Update player system
+            playerSystem.update();
+        }
 
         // Update screen
         window.update();
