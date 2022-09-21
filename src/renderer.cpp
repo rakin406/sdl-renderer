@@ -4,6 +4,7 @@
 #include "../include/components.h"
 #include "../include/constants.h"
 #include "../include/renderer.h"
+#include "../include/utils.h"
 
 Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer)
 {
@@ -13,11 +14,8 @@ Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer)
 
 void Renderer::drawPlayer(entt::registry &registry, entt::entity &entity)
 {
-    // Get player color
-    const auto &[r, g, b] = PLAYER_COLOR;
-
     // Set player circle color
-    SDL_SetRenderDrawColor(this->renderer, r, g, b, SDL_ALPHA_OPAQUE);
+    setRenderColor(this->renderer, PLAYER_COLOR);
 
     // Get player entity position
     auto &pos = registry.get<Position>(entity);

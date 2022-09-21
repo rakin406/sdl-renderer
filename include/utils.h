@@ -19,6 +19,14 @@ struct Circle
 };
 
 /**
+ * Set color for next render.
+ *
+ * @param renderer SDL renderer.
+ * @param color Render color.
+ */
+void setRenderColor(SDL_Renderer *renderer, const RGB &color);
+
+/**
  * Draw circle on screen.
  *
  * @param renderer SDL renderer.

@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 
 #include "../include/constants.h"
+#include "../include/utils.h"
 #include "../include/window.h"
 
 Window::Window()
@@ -34,12 +35,8 @@ bool Window::isQuitRequested()
 
 void Window::clear()
 {
-    // Get screen color
-    const auto &[r, g, b] = SCREEN_COLOR;
-
     // Set background color
-    SDL_SetRenderDrawColor(this->renderer, r, g, b, SDL_ALPHA_OPAQUE);
-
+    setRenderColor(this->renderer, SCREEN_COLOR);
     // Clear screen
     SDL_RenderClear(this->renderer);
 }

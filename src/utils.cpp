@@ -2,6 +2,12 @@
 
 #include "../include/utils.h"
 
+void setRenderColor(SDL_Renderer *renderer, const RGB &color)
+{
+    const auto &[r, g, b] = color;
+    SDL_SetRenderDrawColor(renderer, r, g, b, SDL_ALPHA_OPAQUE);
+}
+
 void drawCircle(SDL_Renderer *renderer, const Circle *circle)
 {
     // Get circle properties
