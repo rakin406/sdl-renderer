@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-#include <boost/uuid/uuid.hpp>
 #include <cmath>
 #include <cstdlib>
 #include <utility>
@@ -7,10 +6,10 @@
 #include "../include/components.h"
 #include "../include/constants.h"
 #include "../include/playerSystem.h"
-#include "../include/positionRegistry.h"
 
 namespace
 {
+constexpr int SPEED = 20;
 /**
  * Get current mouse position.
  *
@@ -30,13 +29,7 @@ Position getMousePosition()
 }
 } // namespace
 
-PlayerSystem::PlayerSystem(boost::uuids::uuid entity,
-                           PositionRegistry positions)
-    : entity(entity), positions(std::move(positions))
-{
-}
-
-void PlayerSystem::update()
+void update()
 {
     // Get entity and mouse positions
     Position playerPos = this->positions.get(this->entity);
@@ -47,8 +40,8 @@ void PlayerSystem::update()
     int distanceY = std::abs(mousePos.y - playerPos.y);
 
     // Initial player speed
-    int speedX = PLAYER_SPEED;
-    int speedY = PLAYER_SPEED;
+    int speedX = SPEED;
+    int speedY = SPEED;
 
     // Set speed as difference in distance for the final x-axis movement
     if (distanceX < speedX)

@@ -1,20 +1,18 @@
 #include <SDL2/SDL.h>
-#include <boost/uuid/uuid.hpp>
 
 #include "../include/components.h"
 #include "../include/constants.h"
 #include "../include/playerSystem.h"
-#include "../include/positionRegistry.h"
 #include "../include/renderer.h"
 #include "../include/utils.h"
 
 Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer)
 {
     // Set default player radius
-    this->playerCircle.radius = PLAYER_RADIUS;
+    this->playerCircle.radius = Renderer::PLAYER_RADIUS;
 }
 
-void Renderer::drawPlayer(PlayerSystem playerSystem)
+void Renderer::drawPlayer()
 {
     // Get player color
     const auto &[r, g, b] = PLAYER_COLOR;

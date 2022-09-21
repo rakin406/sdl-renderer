@@ -13,8 +13,4 @@ constexpr RGB SCREEN_COLOR = {253, 248, 150};
 constexpr RGB PLAYER_COLOR = {119, 221, 119};
 constexpr RGB ENEMY_COLOR = {255, 105, 97};
 
-// Player constants
-constexpr int PLAYER_RADIUS = 40;
-constexpr int PLAYER_SPEED = 20;
-
 #endif
