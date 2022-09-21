@@ -25,7 +25,7 @@ public:
 
 private:
     // A map containing entity ID and boolean
-    std::map<boost::uuids::uuid, bool> entities;
+    std::map<boost::uuids::uuid, bool> entities{};
 };
 
 #endif

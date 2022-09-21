@@ -36,9 +36,9 @@ public:
     void setPlayerCircle(Circle circle) { this->playerCircle = circle; }
 
 private:
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-    Circle playerCircle;
+    SDL_Window *window = nullptr;
+    SDL_Renderer *renderer = nullptr;
+    Circle playerCircle{};
 };
 
 #endif

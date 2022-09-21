@@ -23,8 +23,8 @@ public:
     }
 
 private:
-    boost::uuids::uuid entity;
-    PositionRegistry positions;
+    boost::uuids::uuid entity{};
+    PositionRegistry positions{};
 };
 
 #endif

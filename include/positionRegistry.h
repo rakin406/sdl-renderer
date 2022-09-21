@@ -30,7 +30,7 @@ public:
 
 private:
     // A map containing ID and position values
-    std::map<boost::uuids::uuid, Position> positions;
+    std::map<boost::uuids::uuid, Position> positions{};
 };
 
 #endif
