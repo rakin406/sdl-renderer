@@ -14,7 +14,7 @@ Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer)
     this->playerCircle.radius = PLAYER_RADIUS;
 }
 
-void Renderer::drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem)
+void Renderer::drawPlayer(PlayerSystem playerSystem)
 {
     // Get player color
     const auto &[r, g, b] = PLAYER_COLOR;
@@ -23,6 +23,7 @@ void Renderer::drawPlayer(boost::uuids::uuid entity, PlayerSystem playerSystem)
     SDL_SetRenderDrawColor(this->renderer, r, g, b, SDL_ALPHA_OPAQUE);
 
     // Get player entity position
+    boost::uuids::uuid entity = playerSystem.getEntity();
     Position playerPos = playerSystem.getPositions().get(entity);
 
     // Set player circle position

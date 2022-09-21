@@ -20,8 +20,8 @@ public:
     // Kill and exit window
     void destroy();
 
-    // Getter
-    SDL_Renderer *getRenderer() { return this->renderer; }
+    // Getter for renderer context
+    SDL_Renderer *getRendererContext() { return this->renderer; }
 
 private:
     SDL_Window *window = nullptr;

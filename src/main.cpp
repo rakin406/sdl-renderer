@@ -5,12 +5,16 @@
 #include "../include/entityManager.h"
 #include "../include/playerSystem.h"
 #include "../include/positionRegistry.h"
+#include "../include/renderer.h"
 #include "../include/window.h"
 
 int main()
 {
     // Initialize SDL window
     Window window;
+
+    // Initialize renderer
+    Renderer renderer(window.getRendererContext());
 
     // Initialize entities
     EntityManager entities;
@@ -43,7 +47,7 @@ int main()
         if (!player.is_nil() || !playerSystem.getEntity().is_nil())
         {
             // Draw player entity
-            window.drawPlayer(player, playerSystem);
+            renderer.drawPlayer(playerSystem);
 
             // Update player system
             playerSystem.update();
