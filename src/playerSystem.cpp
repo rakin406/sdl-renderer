@@ -1,38 +1,31 @@
 #include <SDL2/SDL.h>
 #include <cmath>
 #include <cstdlib>
+#include <entt/entt.hpp>
 #include <utility>
 
 #include "../include/components.h"
 #include "../include/constants.h"
 #include "../include/playerSystem.h"
 
-namespace
-{
-constexpr int SPEED = 20;
+constexpr static int SPEED = 20;
+
 /**
  * Get current mouse position.
  *
  * @return position struct.
  */
-Position getMousePosition()
+Position getMousePosition();
+
+void updatePlayer(entt::registry &registry, entt::entity &entity)
 {
-    Position mousePos{};
+    // Get player entity position
+    auto &pos = registry.get<Position>(entity);
 
-    // Make sure we have the latest mouse state.
-    SDL_PumpEvents();
+    // Copy const player position
+    Position playerPos = pos;
 
-    // Get mouse position
-    SDL_GetMouseState(&mousePos.x, &mousePos.y);
-
-    return mousePos;
-}
-} // namespace
-
-void update()
-{
     // Get entity and mouse positions
-    Position playerPos = this->positions.get(this->entity);
     Position mousePos = getMousePosition();
 
     // Distance between player and mouse position
@@ -75,6 +68,19 @@ void update()
         playerPos.y += speedY;
     }
 
-    // Update position
-    this->positions.set(entity, playerPos);
+    // Update entity position
+    registry.replace<Position>(entity, playerPos);
+}
+
+Position getMousePosition()
+{
+    Position mousePos{};
+
+    // Make sure we have the latest mouse state.
+    SDL_PumpEvents();
+
+    // Get mouse position
+    SDL_GetMouseState(&mousePos.x, &mousePos.y);
+
+    return mousePos;
 }

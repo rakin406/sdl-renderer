@@ -2,7 +2,8 @@
 
 #include "../include/components.h"
 #include "../include/constants.h"
-// #include "../include/renderer.h"
+#include "../include/playerSystem.h"
+#include "../include/renderer.h"
 #include "../include/window.h"
 
 int main()
@@ -11,7 +12,7 @@ int main()
     Window window;
 
     // Initialize renderer
-    // Renderer renderer(window.getRendererContext());
+    Renderer renderer(window.getRendererContext());
 
     // Initialize ECS registry
     entt::registry registry;
@@ -37,10 +38,10 @@ int main()
         window.clear();
 
         // Draw player entity
-        // renderer.drawPlayer(playerSystem);
+        renderer.drawPlayer(registry, player);
 
         // Update player system
-        // playerSystem.update();
+        updatePlayer(registry, player);
 
         // Update screen
         window.update();

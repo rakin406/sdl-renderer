@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include <SDL2/SDL.h>
+#include <entt/entt.hpp>
 
 #include "../include/utils.h"
 
@@ -11,7 +12,7 @@ public:
     explicit Renderer(SDL_Renderer *renderer);
 
     // Draw player entity on screen
-    void drawPlayer();
+    void drawPlayer(entt::registry &registry, entt::entity &entity);
 
 private:
     constexpr static int PLAYER_RADIUS = 40;
