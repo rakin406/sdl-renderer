@@ -141,12 +141,17 @@ void System::updateEnemies()
             // Check if tag matches enemy tag
             if (tag == Tag::Enemy)
             {
-                // Check if enemy position is equal to last player position
-                if (pos == lastPlayerPos)
+                // Check if enemy collides with player entity
+                if (tools::checkCollision(this->lastPlayerPos, pos,
+                                          this->PLAYER_RADIUS))
                 {
+                    // Game over
+                    this->gameOver = true;
                 }
 
                 // Logic
             }
         });
 }
+
+bool System::isGameOver() const { return this->gameOver; }

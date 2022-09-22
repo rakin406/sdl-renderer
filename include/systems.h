@@ -11,11 +11,14 @@ class System
 public:
     explicit System(entt::registry *registry);
 
-    // Update player and it's components.
+    // Update player and it's components
     void updatePlayer();
 
-    // Update enemies and their components.
+    // Update enemies and their components
     void updateEnemies();
+
+    // Return true if game is over
+    bool isGameOver() const;
 
 private:
     const int PLAYER_RADIUS = 40;                  // Default player radius
