@@ -78,20 +78,17 @@ void System::updatePlayer()
 
     // Loop components
     view.each(
-        [this](const auto entity, const auto &tag, auto &pos)
+        [this](const auto &tag, auto &pos)
         {
             // Check if tag matches player tag
             if (tag == Tag::Player)
             {
-                // Copy const player position
-                struct Position playerPos = pos;
-
                 // Get entity and mouse positions
                 struct Position mousePos = tools::player::getMousePosition();
 
                 // Distance between player and mouse position
-                int distanceX = std::abs(mousePos.x - playerPos.x);
-                int distanceY = std::abs(mousePos.y - playerPos.y);
+                int distanceX = std::abs(mousePos.x - pos.x);
+                int distanceY = std::abs(mousePos.y - pos.y);
 
                 // Initial player speed
                 int speedX = tools::player::SPEED;
@@ -111,10 +108,7 @@ void System::updatePlayer()
                 }
 
                 // Move towards cursor
-                tools::moveTowards(playerPos, mousePos, speedX, speedY);
-
-                // Update entity position
-                this->registry->replace<Position>(entity, playerPos);
+                tools::moveTowards(pos, mousePos, speedX, speedY);
             }
         });
 }
