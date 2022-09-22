@@ -4,19 +4,27 @@
 #include <entt/entt.hpp>
 #include <vector>
 
+// This class handles both the player and the enemy systems
 class System
 {
 public:
-    explicit System(entt::registry *registry);
+    /**
+     * Update player and it's components.
+     *
+     * @param registry The main registry of ECS.
+     */
+    void updatePlayer(entt::registry *registry);
 
-    void updatePlayer(entt::entity &entity);
-
-    void updateEnemies(std::vector<entt::entity> &enemies);
+    /**
+     * Update enemies and their components.
+     *
+     * @param registry The main registry of ECS.
+     */
+    void updateEnemies(entt::registry *registry);
 
 private:
-    static constexpr int PLAYER_RADIUS = 40;
-    static constexpr int TRIANGLE_SIDE_LENGTH = 5;
-    entt::registry *registry{};
+    static constexpr int PLAYER_RADIUS = 40;       // Default player radius
+    static constexpr int TRIANGLE_SIDE_LENGTH = 5; // Triangle length
 };
 
 #endif
