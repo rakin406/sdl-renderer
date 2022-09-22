@@ -42,14 +42,14 @@ System::System(entt::registry *registry) : registry(registry) {}
 void System::updatePlayer()
 {
     // Get registry components
-    auto view = this->registry->view<const std::string, Position>();
+    auto view = this->registry->view<const Tag, Position>();
 
     // Loop components
     view.each(
         [this](const auto entity, const auto &tag, auto &pos)
         {
             // Check if tag matches player tag
-            if (tag == PLAYER_TAG)
+            if (tag == Tag::Player)
             {
                 // Copy const player position
                 struct Position playerPos = pos;
@@ -107,14 +107,14 @@ void System::updatePlayer()
 void System::updateEnemies()
 {
     // Get registry components
-    auto view = this->registry->view<const std::string, Position>();
+    auto view = this->registry->view<const Tag, Position>();
 
     // Loop components
     view.each(
         [this](const auto &tag, auto &pos)
         {
-            // Check if tag matches player tag
-            if (tag == ENEMY_TAG)
+            // Check if tag matches enemy tag
+            if (tag == Tag::Enemy)
             {
                 // Logic
             }
