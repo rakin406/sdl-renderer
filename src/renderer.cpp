@@ -42,6 +42,7 @@ void Renderer::drawPlayer(entt::registry &registry)
         });
 }
 
+// TODO: Finish this method
 void Renderer::drawEnemies(entt::registry &registry)
 {
     // Set enemy triangle color
