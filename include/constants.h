@@ -13,4 +13,7 @@ constexpr RGB SCREEN_COLOR = {253, 248, 150};
 constexpr RGB PLAYER_COLOR = {119, 221, 119};
 constexpr RGB ENEMY_COLOR = {255, 105, 97};
 
+// Enemy constant
+constexpr int MAX_ENEMIES = 5;
+
 #endif
