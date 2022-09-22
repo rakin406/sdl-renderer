@@ -19,11 +19,4 @@ constexpr int PLAYER_RADIUS = 40;
 // Enemy constants
 constexpr int MAX_ENEMIES = 5;
 
-// Entity tags
-enum class Tag
-{
-    Player,
-    Enemy
-};
-
 #endif

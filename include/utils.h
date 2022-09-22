@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <SDL2/SDL.h>
+#include <glm/vec2.hpp>
 
 #include "components.h"
 
@@ -10,22 +11,6 @@ struct RGB
     int red;
     int green;
     int blue;
-};
-
-// Custom circle type for SDL
-struct Circle
-{
-    int centerX; // Center x-axis position
-    int centerY; // Center y-axis position
-    int radius;  // Radius of the circle
-};
-
-// Custom triangle type for SDL
-struct Triangle
-{
-    Position point1;
-    Position point2;
-    Position point3;
 };
 
 /**

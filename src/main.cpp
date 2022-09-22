@@ -1,4 +1,5 @@
 #include <entt/entt.hpp>
+#include <glm/vec2.hpp>
 #include <random>
 
 #include "../include/components.h"
@@ -37,7 +38,7 @@ int main()
     while (run)
     {
         // Stop loop if user requests quit
-        if (window.isQuitRequested())
+        if (Window::isQuitRequested())
         {
             run = false;
         }
@@ -69,7 +70,8 @@ void setupPlayer(entt::registry *registry)
     // of the screen.
     auto player = registry->create();
     registry->emplace<Tag>(player, Tag::Player); // Player tag
-    registry->emplace<Position>(player, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    glm::ivec2 centerPos = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
+    registry->emplace<Circle>(player, centerPos, PLAYER_RADIUS);
 }
 
 void setupEnemies(entt::registry *registry, std::mt19937 &rng)
@@ -85,7 +87,7 @@ void setupEnemies(entt::registry *registry, std::mt19937 &rng)
         std::uniform_int_distribution<int> posY(0, SCREEN_HEIGHT);
 
         // Set enemy position
-        registry->emplace<Position>(enemy, posX(rng), posY(rng));
+        registry->emplace<glm::ivec2>(enemy, posX(rng), posY(rng));
     }
 }
 

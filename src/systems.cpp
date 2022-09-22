@@ -2,6 +2,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <entt/entt.hpp>
+#include <glm/vec2.hpp>
 
 #include "../include/components.h"
 #include "../include/constants.h"
@@ -19,7 +20,7 @@ constexpr int ENEMY_SPEED = PLAYER_SPEED + 10;
  * @param enemyPos Enemy position.
  * @param playerRadius Player circle radius.
  */
-bool checkCollision(const Position &playerPos, const Position &enemyPos,
+bool checkCollision(const glm::ivec2 &playerPos, const glm::ivec2 &enemyPos,
                     int playerRadius)
 {
     return (enemyPos.x == playerPos.x + playerRadius) ||
@@ -36,7 +37,7 @@ bool checkCollision(const Position &playerPos, const Position &enemyPos,
  * @param speedX Speed in x-axis.
  * @param speedY Speed in y-axis.
  */
-void moveTowards(Position &pos, Position &target, int speedX, int speedY)
+void moveTowards(glm::ivec2 &pos, glm::ivec2 &target, int speedX, int speedY)
 {
     // Move x-axis position
     if (pos.x > target.x)
@@ -64,9 +65,9 @@ void moveTowards(Position &pos, Position &target, int speedX, int speedY)
  *
  * @return position struct.
  */
-Position getMousePosition()
+glm::ivec2 getMousePosition()
 {
-    Position mousePos{};
+    glm::ivec2 mousePos{};
 
     // Make sure we have the latest mouse state.
     SDL_PumpEvents();
@@ -84,24 +85,27 @@ System::System(entt::registry *registry) : registry(registry) {}
 void System::updatePlayer()
 {
     // Get registry components
-    auto view = this->registry->view<const Tag, Position>();
+    auto view = this->registry->view<const Tag, Circle>();
 
     // Loop components
     view.each(
-        [this](const auto &tag, auto &pos)
+        [this](const auto &tag, auto &circle)
         {
             // Check if tag matches player tag
             if (tag == Tag::Player)
             {
+                // Get circle position
+                glm::ivec2 playerPos = circle.centerPos;
+
                 // Save last player position
-                this->lastPlayerPos = pos;
+                this->lastPlayerPos = playerPos;
 
                 // Get entity and mouse positions
-                struct Position mousePos = getMousePosition();
+                glm::ivec2 mousePos = getMousePosition();
 
                 // Distance between player and mouse position
-                int distanceX = std::abs(mousePos.x - pos.x);
-                int distanceY = std::abs(mousePos.y - pos.y);
+                int distanceX = std::abs(mousePos.x - playerPos.x);
+                int distanceY = std::abs(mousePos.y - playerPos.y);
 
                 // Initial player speed
                 int speedX = PLAYER_SPEED;
@@ -121,7 +125,7 @@ void System::updatePlayer()
                 }
 
                 // Move towards cursor
-                moveTowards(pos, mousePos, speedX, speedY);
+                moveTowards(circle.centerPos, mousePos, speedX, speedY);
             }
         });
 }
@@ -129,7 +133,7 @@ void System::updatePlayer()
 void System::updateEnemies()
 {
     // Get registry components
-    auto view = this->registry->view<const Tag, Position>();
+    auto view = this->registry->view<const Tag, glm::ivec2>();
 
     // Loop components
     view.each(

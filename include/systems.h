@@ -2,6 +2,7 @@
 #define SYSTEMS_H
 
 #include <entt/entt.hpp>
+#include <glm/vec2.hpp>
 
 #include "components.h"
 
@@ -22,7 +23,7 @@ public:
 
 private:
     entt::registry *registry{}; // Main registry
-    Position lastPlayerPos{};   // Last position of last player
+    glm::ivec2 lastPlayerPos{}; // Last position of last player
     bool gameOver = false;      // Game over boolean
 };
 

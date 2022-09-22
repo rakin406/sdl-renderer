@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <entt/entt.hpp>
+#include <glm/vec2.hpp>
 
 #include "../include/components.h"
 #include "../include/constants.h"
@@ -20,24 +21,20 @@ Renderer::Renderer(SDL_Renderer *renderer, entt::registry *registry)
 void Renderer::drawPlayer()
 {
     // Get registry components
-    auto view = this->registry->view<const Tag, Position>();
+    auto view = this->registry->view<const Tag, Circle>();
 
     // Set player circle color
     setRenderColor(this->renderer, PLAYER_COLOR);
 
     // Loop components
     view.each(
-        [this](const auto &tag, auto &pos)
+        [this](const auto &tag, const auto &circle)
         {
             // Check if tag matches player tag
             if (tag == Tag::Player)
             {
-                // Set player circle position
-                this->playerCircle.centerX = pos.x;
-                this->playerCircle.centerY = pos.y;
-
                 // Draw player circle
-                drawCircle(this->renderer, &this->playerCircle);
+                drawCircle(this->renderer, &circle);
             }
         });
 }
@@ -46,7 +43,7 @@ void Renderer::drawPlayer()
 void Renderer::drawEnemies()
 {
     // Get registry components
-    auto view = this->registry->view<const Tag, Position>();
+    auto view = this->registry->view<const Tag, glm::ivec2>();
 
     // Set enemy triangle color
     setRenderColor(this->renderer, ENEMY_COLOR);
@@ -60,9 +57,9 @@ void Renderer::drawEnemies()
             {
                 // TODO: Finish this
                 // Set enemy triangle position
-                this->enemyTriangle.point1 = {100, 300};
-                this->enemyTriangle.point2 = {100, 300};
-                this->enemyTriangle.point3 = {300, 100};
+                this->enemyTriangle.points[0] = {100, 300};
+                this->enemyTriangle.points[1] = {100, 300};
+                this->enemyTriangle.points[2] = {300, 100};
 
                 // Draw enemy triangle
                 drawTriangle(this->renderer, &this->enemyTriangle);

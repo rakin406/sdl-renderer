@@ -1,10 +1,25 @@
 #ifndef COMPONENTS_H
 #define COMPONENTS_H
 
-struct Position
+#include <array>
+#include <glm/vec2.hpp>
+
+// Entity tags
+enum class Tag
 {
-    int x;
-    int y;
+    Player,
+    Enemy
+};
+
+struct Circle
+{
+    glm::ivec2 centerPos;
+    int radius; // Radius of the circle
+};
+
+struct Triangle
+{
+    std::array<glm::ivec2, 3> points;
 };
 
 #endif
