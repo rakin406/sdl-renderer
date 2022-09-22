@@ -7,6 +7,8 @@
 #include "../include/systems.h"
 #include "../include/window.h"
 
+// TODO: Add shape components to entities
+
 void setupPlayer(entt::registry *registry);
 void setupEnemies(entt::registry *registry, std::mt19937 &rng);
 void setup(entt::registry *registry);

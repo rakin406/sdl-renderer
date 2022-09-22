@@ -45,17 +45,27 @@ void Renderer::drawPlayer()
 // TODO: Finish this method
 void Renderer::drawEnemies()
 {
+    // Get registry components
+    auto view = this->registry->view<const Tag, Position>();
+
     // Set enemy triangle color
     setRenderColor(this->renderer, ENEMY_COLOR);
 
-    // Get enemy entity position
-    // auto &pos = registry.get<Position>(entity);
+    // Loop components
+    view.each(
+        [this](const auto &tag, auto &pos)
+        {
+            // Check if tag matches enemy tag
+            if (tag == Tag::Enemy)
+            {
+                // TODO: Finish this
+                // Set enemy triangle position
+                this->enemyTriangle.point1 = {100, 300};
+                this->enemyTriangle.point2 = {100, 300};
+                this->enemyTriangle.point3 = {300, 100};
 
-    // Set enemy triangle position
-    this->enemyTriangle.point1 = {100, 300};
-    this->enemyTriangle.point2 = {100, 300};
-    this->enemyTriangle.point3 = {300, 100};
-
-    // Draw enemy triangle
-    drawTriangle(this->renderer, &this->enemyTriangle);
+                // Draw enemy triangle
+                drawTriangle(this->renderer, &this->enemyTriangle);
+            }
+        });
 }
