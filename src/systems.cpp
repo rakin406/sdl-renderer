@@ -37,24 +37,26 @@ Position getMousePosition()
 } // namespace player
 } // namespace tools
 
-void System::updatePlayer(entt::registry &registry)
+System::System(entt::registry *registry) : registry(registry) {}
+
+void System::updatePlayer()
 {
     // Get registry components
-    auto view = registry.view<const std::string, Position>();
+    auto view = this->registry->view<const std::string, Position>();
 
     // Filter out entity tags and update only the player
     view.each(
         // Loop components
-        [this, &registry](const auto entity, const auto &tag, auto &pos)
+        [this](const auto entity, const auto &tag, auto &pos)
         {
             // Check if tag matches player tag
             if (tag == PLAYER_TAG)
             {
                 // Copy const player position
-                Position playerPos = pos;
+                struct Position playerPos = pos;
 
                 // Get entity and mouse positions
-                Position mousePos = tools::player::getMousePosition();
+                struct Position mousePos = tools::player::getMousePosition();
 
                 // Distance between player and mouse position
                 int distanceX = std::abs(mousePos.x - playerPos.x);
@@ -98,13 +100,13 @@ void System::updatePlayer(entt::registry &registry)
                 }
 
                 // Update entity position
-                registry.replace<Position>(entity, playerPos);
+                this->registry->replace<Position>(entity, playerPos);
             }
         });
 }
 
 // TODO: Finish this
-void System::updateEnemies(entt::registry &registry)
+void System::updateEnemies()
 {
     // Loop over all enemy IDs
     // for (const auto &e : enemies)
