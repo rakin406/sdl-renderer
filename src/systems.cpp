@@ -129,9 +129,9 @@ void System::drawEnemies()
             {
                 // TODO: Finish this
                 // Set enemy triangle position
-                this->enemyTriangle.points[0] = {100, 300};
-                this->enemyTriangle.points[1] = {100, 300};
-                this->enemyTriangle.points[2] = {300, 100};
+                this->enemyTriangle.points[0] = {pos.x - 20, pos.y + 20};
+                this->enemyTriangle.points[1] = {pos.x, pos.y - 20};
+                this->enemyTriangle.points[2] = {pos.x + 20, pos.y + 20};
 
                 // Draw enemy triangle
                 drawTriangle(this->renderer, &this->enemyTriangle);
