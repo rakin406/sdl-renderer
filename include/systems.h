@@ -22,6 +22,7 @@ private:
     static constexpr int TRIANGLE_SIDE_LENGTH = 5; // Triangle length
     entt::registry *registry{};                    // Main registry
     Position lastPlayerPos{}; // Last position of last player
+    bool gameOver = false;    // Game over boolean
 };
 
 #endif
