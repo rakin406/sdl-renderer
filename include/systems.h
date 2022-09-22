@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <entt/entt.hpp>
 #include <glm/vec2.hpp>
+#include <random>
 
 #include "components.h"
 
@@ -31,6 +32,9 @@ public:
     // Update enemies and their components
     void updateEnemies();
 
+    // Get random position
+    glm::ivec2 getRandomPosition();
+
     // Return true if game is over
     [[nodiscard]] bool isGameOver() const;
 
@@ -40,6 +44,7 @@ private:
     bool gameOver = false;            // Game over boolean
     SDL_Renderer *renderer = nullptr; // Main renderer
     Triangle enemyTriangle{};
+    std::random_device dev; // For random number generation
 };
 
 #endif

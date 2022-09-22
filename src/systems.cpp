@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <entt/entt.hpp>
 #include <glm/vec2.hpp>
+#include <random>
 
 #include "../include/components.h"
 #include "../include/constants.h"
@@ -89,6 +90,7 @@ System::System(entt::registry *registry, SDL_Renderer *renderer)
 {
 }
 
+// FIX: Circle doesn't get drawn on screen
 void System::drawPlayer()
 {
     // Get registry components
@@ -206,12 +208,38 @@ void System::updateEnemies()
                 // Otherwise continue moving
                 else
                 {
+                    // TODO: Instead of moving towards the player. Save the last
+                    // player position and POINT the triangle angle towards the
+                    // player and move STRAIGHT until the end of screen size.
                     // Move enemy towards player
                     moveTowards(pos, this->lastPlayerPos, ENEMY_SPEED,
                                 ENEMY_SPEED);
                 }
+
+                // TODO: Refactor this
+                if (pos.x == 0 || pos.x == SCREEN_WIDTH || pos.y == 0 ||
+                    pos.y == SCREEN_HEIGHT)
+                {
+                    // Reset position
+                    pos = this->getRandomPosition();
+                }
             }
         });
+}
+
+glm::ivec2 System::getRandomPosition()
+{
+    // Get random generator
+    std::mt19937 rng(this->dev());
+
+    // Generate random position
+    std::uniform_int_distribution<int> randomPosX(0, SCREEN_WIDTH);
+    std::uniform_int_distribution<int> randomPosY(0, SCREEN_HEIGHT);
+
+    // Store position
+    glm::ivec2 position = {randomPosX(rng), randomPosY(rng)};
+
+    return position;
 }
 
 bool System::isGameOver() const { return this->gameOver; }
