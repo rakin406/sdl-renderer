@@ -44,9 +44,8 @@ void System::updatePlayer()
     // Get registry components
     auto view = this->registry->view<const std::string, Position>();
 
-    // Filter out entity tags and update only the player
+    // Loop components
     view.each(
-        // Loop components
         [this](const auto entity, const auto &tag, auto &pos)
         {
             // Check if tag matches player tag
@@ -105,16 +104,19 @@ void System::updatePlayer()
         });
 }
 
-// TODO: Finish this
 void System::updateEnemies()
 {
-    // Loop over all enemy IDs
-    // for (const auto &e : enemies)
-    // {
-    //     // Get enemy entity position
-    //     auto &pos = this->registry.get<Position>(e);
-    //
-    //     // Copy const enemy position
-    //     Position enemyPos = pos;
-    // }
+    // Get registry components
+    auto view = this->registry->view<const std::string, Position>();
+
+    // Loop components
+    view.each(
+        [this](const auto &tag, auto &pos)
+        {
+            // Check if tag matches player tag
+            if (tag == ENEMY_TAG)
+            {
+                // Logic
+            }
+        });
 }
