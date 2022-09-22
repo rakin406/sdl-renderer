@@ -16,23 +16,33 @@ Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer)
     this->playerCircle.radius = Renderer::PLAYER_RADIUS;
 }
 
-void Renderer::drawPlayer(entt::registry &registry, entt::entity &entity)
+void Renderer::drawPlayer(entt::registry &registry)
 {
+    // Get registry components
+    auto view = registry.view<const std::string, Position>();
+
     // Set player circle color
     setRenderColor(this->renderer, PLAYER_COLOR);
 
-    // Get player entity position
-    auto &pos = registry.get<Position>(entity);
+    // Filter out entity tags and draw only the player
+    view.each(
+        // Loop components
+        [this](const auto &tag, auto &pos)
+        {
+            // Check if tag matches player tag
+            if (tag == PLAYER_TAG)
+            {
+                // Set player circle position
+                this->playerCircle.centerX = pos.x;
+                this->playerCircle.centerY = pos.y;
 
-    // Set player circle position
-    this->playerCircle.centerX = pos.x;
-    this->playerCircle.centerY = pos.y;
-
-    // Draw player circle
-    drawCircle(this->renderer, &this->playerCircle);
+                // Draw player circle
+                drawCircle(this->renderer, &this->playerCircle);
+            }
+        });
 }
 
-void Renderer::drawEnemy()
+void Renderer::drawEnemies(entt::registry &registry)
 {
     // Set enemy triangle color
     setRenderColor(this->renderer, ENEMY_COLOR);
