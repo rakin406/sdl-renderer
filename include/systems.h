@@ -9,18 +9,10 @@ class System
 public:
     explicit System(entt::registry *registry);
 
-    /**
-     * Update player and it's components.
-     *
-     * @param registry The main registry of ECS.
-     */
+    // Update player and it's components.
     void updatePlayer();
 
-    /**
-     * Update enemies and their components.
-     *
-     * @param registry The main registry of ECS.
-     */
+    // Update enemies and their components.
     void updateEnemies();
 
 private:
