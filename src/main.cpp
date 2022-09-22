@@ -7,6 +7,8 @@
 #include "../include/window.h"
 
 void setupEntities(entt::registry *registry);
+void drawEntities(Renderer *renderer);
+void updateEntities(System *system);
 
 int main()
 {
@@ -38,13 +40,13 @@ int main()
         // Clear screen with background color
         window.clear();
 
-        // Draw entities
-        renderer.drawPlayer();
-        renderer.drawEnemies();
+        drawEntities(&renderer);
 
-        // Update systems
-        system.updatePlayer();
-        system.updateEnemies();
+        // Don't update entities if game is over
+        if (!system.isGameOver())
+        {
+            updateEntities(&system);
+        }
 
         // Update screen
         window.update();
@@ -70,4 +72,16 @@ void setupEntities(entt::registry *registry)
         auto enemy = registry->create();
         registry->emplace<Tag>(enemy, Tag::Enemy); // Enemy tag
     }
+}
+
+void drawEntities(Renderer *renderer)
+{
+    renderer->drawPlayer();
+    renderer->drawEnemies();
+}
+
+void updateEntities(System *system)
+{
+    system->updatePlayer();
+    system->updateEnemies();
 }
