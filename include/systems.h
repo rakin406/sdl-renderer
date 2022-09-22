@@ -7,23 +7,26 @@
 class System
 {
 public:
+    explicit System(entt::registry *registry);
+
     /**
      * Update player and it's components.
      *
      * @param registry The main registry of ECS.
      */
-    void updatePlayer(entt::registry &registry);
+    void updatePlayer();
 
     /**
      * Update enemies and their components.
      *
      * @param registry The main registry of ECS.
      */
-    void updateEnemies(entt::registry &registry);
+    void updateEnemies();
 
 private:
     static constexpr int PLAYER_RADIUS = 40;       // Default player radius
     static constexpr int TRIANGLE_SIDE_LENGTH = 5; // Triangle length
+    entt::registry *registry{};
 };
 
 #endif
