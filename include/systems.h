@@ -2,7 +2,6 @@
 #define SYSTEMS_H
 
 #include <entt/entt.hpp>
-#include <vector>
 
 // This class handles both the player and the enemy systems
 class System
