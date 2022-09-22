@@ -18,8 +18,12 @@ public:
      */
     void drawPlayer(entt::registry &registry);
 
-    // Draw enemy entity on screen
-    void drawEnemy();
+    /**
+     * Draw enemy entities on screen.
+     *
+     * @param registry The main registry of ECS.
+     */
+    void drawEnemies(entt::registry &registry);
 
 private:
     static constexpr int PLAYER_RADIUS = 40;
