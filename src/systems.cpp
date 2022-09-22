@@ -9,7 +9,39 @@
 
 namespace tools
 {
+// TODO: Create definition for this function
 bool checkCollision();
+
+/**
+ * Move towards position with a certain speed.
+ *
+ * @param pos1 Position one.
+ * @param pos2 Position two.
+ * @param speedX Speed in x-axis.
+ * @param speedY Speed in y-axis.
+ */
+void moveTowards(Position &pos1, Position &pos2, int speedX, int speedY)
+{
+    // Move x-axis position
+    if (pos1.x > pos2.x)
+    {
+        pos1.x -= speedX;
+    }
+    else if (pos1.x < pos2.x)
+    {
+        pos1.x += speedX;
+    }
+
+    // Move y-axis position
+    if (pos1.y > pos2.y)
+    {
+        pos1.y -= speedY;
+    }
+    else if (pos1.y < pos2.y)
+    {
+        pos1.y += speedY;
+    }
+}
 
 namespace player
 {
@@ -78,25 +110,8 @@ void System::updatePlayer()
                     speedY = distanceY;
                 }
 
-                // Move x-axis position
-                if (playerPos.x > mousePos.x)
-                {
-                    playerPos.x -= speedX;
-                }
-                else if (playerPos.x < mousePos.x)
-                {
-                    playerPos.x += speedX;
-                }
-
-                // Move y-axis position
-                if (playerPos.y > mousePos.y)
-                {
-                    playerPos.y -= speedY;
-                }
-                else if (playerPos.y < mousePos.y)
-                {
-                    playerPos.y += speedY;
-                }
+                // Move towards cursor
+                tools::moveTowards(playerPos, mousePos, speedX, speedY);
 
                 // Update entity position
                 this->registry->replace<Position>(entity, playerPos);
