@@ -24,7 +24,6 @@ public:
     void drawEnemies();
 
 private:
-    static constexpr int PLAYER_RADIUS = 40;
     SDL_Renderer *renderer = nullptr;
     entt::registry *registry{};
     Circle playerCircle{};

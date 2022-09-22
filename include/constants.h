@@ -13,7 +13,10 @@ constexpr RGB SCREEN_COLOR = {253, 248, 150};
 constexpr RGB PLAYER_COLOR = {119, 221, 119};
 constexpr RGB ENEMY_COLOR = {255, 105, 97};
 
-// Enemy constant
+// Player constants
+constexpr int PLAYER_RADIUS = 40;
+
+// Enemy constants
 constexpr int MAX_ENEMIES = 5;
 
 // Entity tags

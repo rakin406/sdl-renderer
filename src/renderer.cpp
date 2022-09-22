@@ -8,13 +8,13 @@
 
 // TODO: Move or remove this
 // Equilateral triangle side length for enemy entity
-static constexpr int TRIANGLE_SIDE_LENGTH = 5;
+constexpr int TRIANGLE_SIDE_LENGTH = 5;
 
 Renderer::Renderer(SDL_Renderer *renderer, entt::registry *registry)
     : renderer(renderer), registry(registry)
 {
     // Set default player radius
-    this->playerCircle.radius = Renderer::PLAYER_RADIUS;
+    this->playerCircle.radius = PLAYER_RADIUS;
 }
 
 void Renderer::drawPlayer()

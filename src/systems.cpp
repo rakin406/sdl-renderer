@@ -26,33 +26,33 @@ bool checkCollision(const Position &playerPos, const Position &enemyPos,
 }
 
 /**
- * Move towards position with a certain speed.
+ * Move towards target position with a certain speed.
  *
- * @param pos1 Position one.
- * @param pos2 Position two.
+ * @param pos Source position.
+ * @param target Target position.
  * @param speedX Speed in x-axis.
  * @param speedY Speed in y-axis.
  */
-void moveTowards(Position &pos1, Position &pos2, int speedX, int speedY)
+void moveTowards(Position *pos, Position *target, int speedX, int speedY)
 {
     // Move x-axis position
-    if (pos1.x > pos2.x)
+    if (pos->x > target->x)
     {
-        pos1.x -= speedX;
+        pos->x -= speedX;
     }
-    else if (pos1.x < pos2.x)
+    else if (pos->x < target->x)
     {
-        pos1.x += speedX;
+        pos->x += speedX;
     }
 
     // Move y-axis position
-    if (pos1.y > pos2.y)
+    if (pos->y > target->y)
     {
-        pos1.y -= speedY;
+        pos->y -= speedY;
     }
-    else if (pos1.y < pos2.y)
+    else if (pos->y < target->y)
     {
-        pos1.y += speedY;
+        pos->y += speedY;
     }
 }
 
@@ -124,7 +124,7 @@ void System::updatePlayer()
                 }
 
                 // Move towards cursor
-                tools::moveTowards(pos, mousePos, speedX, speedY);
+                tools::moveTowards(pos, &mousePos, speedX, speedY);
             }
         });
 }
@@ -143,13 +143,15 @@ void System::updateEnemies()
             {
                 // Check if enemy collides with player entity
                 if (tools::checkCollision(this->lastPlayerPos, pos,
-                                          this->PLAYER_RADIUS))
+                                          PLAYER_RADIUS))
                 {
-                    // Game over
-                    this->gameOver = true;
+                    this->gameOver = true; // Game over
                 }
-
-                // Logic
+                // Otherwise continue moving
+                else
+                {
+                    tools::moveTowards(pos, this->lastPlayerPos);
+                }
             }
         });
 }
