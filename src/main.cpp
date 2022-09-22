@@ -12,11 +12,11 @@ int main()
     // Initialize SDL window
     Window window;
 
-    // Initialize renderer
-    Renderer renderer(window.getRendererContext());
-
     // Initialize ECS registry
     entt::registry registry;
+
+    // Initialize renderer
+    Renderer renderer(window.getRendererContext(), &registry);
 
     // Create player entity and set default player entity position at the center
     // of the screen.
@@ -49,14 +49,13 @@ int main()
         // Clear screen with background color
         window.clear();
 
-        // Draw player entity
-        renderer.drawPlayer(registry);
+        // Draw entities
+        renderer.drawPlayer();
+        renderer.drawEnemies();
 
-        // Draw enemy entity
-        // renderer.drawEnemy();
-
-        // Update player system
+        // Update systems
         system.updatePlayer();
+        system.updateEnemies();
 
         // Update screen
         window.update();
