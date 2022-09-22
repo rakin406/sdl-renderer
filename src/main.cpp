@@ -4,16 +4,13 @@
 
 #include "../include/components.h"
 #include "../include/constants.h"
-#include "../include/renderer.h"
 #include "../include/systems.h"
 #include "../include/window.h"
-
-// TODO: Add shape components to entities
 
 void setupPlayer(entt::registry *registry);
 void setupEnemies(entt::registry *registry, std::mt19937 &rng);
 void setup(entt::registry *registry);
-void drawEntities(Renderer *renderer);
+void drawEntities(System *system);
 void updateEntities(System *system);
 
 int main()
@@ -25,11 +22,8 @@ int main()
     entt::registry registry;
     setup(&registry);
 
-    // Initialize renderer
-    Renderer renderer(window.getRendererContext(), &registry);
-
     // Initialize ECS systems
-    System system(&registry);
+    System system(&registry, window.getRendererContext());
 
     // Event loop run flag
     bool run = true;
@@ -46,7 +40,7 @@ int main()
         // Clear screen with background color
         window.clear();
 
-        drawEntities(&renderer);
+        drawEntities(&system);
 
         // Don't update entities if game is over
         if (!system.isGameOver())
@@ -101,10 +95,10 @@ void setup(entt::registry *registry)
     setupEnemies(registry, rng);
 }
 
-void drawEntities(Renderer *renderer)
+void drawEntities(System *system)
 {
-    renderer->drawPlayer();
-    renderer->drawEnemies();
+    system->drawPlayer();
+    system->drawEnemies();
 }
 
 void updateEntities(System *system)
