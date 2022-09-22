@@ -10,16 +10,17 @@
 // Equilateral triangle side length for enemy entity
 static constexpr int TRIANGLE_SIDE_LENGTH = 5;
 
-Renderer::Renderer(SDL_Renderer *renderer) : renderer(renderer)
+Renderer::Renderer(SDL_Renderer *renderer, entt::registry *registry)
+    : renderer(renderer), registry(registry)
 {
     // Set default player radius
     this->playerCircle.radius = Renderer::PLAYER_RADIUS;
 }
 
-void Renderer::drawPlayer(entt::registry &registry)
+void Renderer::drawPlayer()
 {
     // Get registry components
-    auto view = registry.view<const std::string, Position>();
+    auto view = this->registry->view<const std::string, Position>();
 
     // Set player circle color
     setRenderColor(this->renderer, PLAYER_COLOR);
@@ -43,7 +44,7 @@ void Renderer::drawPlayer(entt::registry &registry)
 }
 
 // TODO: Finish this method
-void Renderer::drawEnemies(entt::registry &registry)
+void Renderer::drawEnemies()
 {
     // Set enemy triangle color
     setRenderColor(this->renderer, ENEMY_COLOR);
