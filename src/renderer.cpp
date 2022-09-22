@@ -25,9 +25,8 @@ void Renderer::drawPlayer()
     // Set player circle color
     setRenderColor(this->renderer, PLAYER_COLOR);
 
-    // Filter out entity tags and draw only the player
+    // Loop components
     view.each(
-        // Loop components
         [this](const auto &tag, auto &pos)
         {
             // Check if tag matches player tag
