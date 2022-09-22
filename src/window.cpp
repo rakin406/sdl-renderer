@@ -23,12 +23,18 @@ bool Window::isQuitRequested()
     // Check for events
     while (SDL_PollEvent(&event) != 0)
     {
-        switch (event.type)
+        if (event.type == SDL_QUIT)
         {
-        case SDL_QUIT:
             return true;
-        default:
-            break;
+        }
+
+        if (event.type == SDL_KEYDOWN)
+        {
+            // Quit on Escape
+            if (event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                return true;
+            }
         }
     }
 

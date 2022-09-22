@@ -12,7 +12,7 @@ public:
     [[nodiscard]] SDL_Renderer *getRendererContext() const;
 
     // Return true if user requests quit
-    bool isQuitRequested();
+    static bool isQuitRequested();
 
     // Clear screen with background color
     void clear();
