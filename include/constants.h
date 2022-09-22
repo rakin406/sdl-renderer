@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <string>
+
 #include "utils.h"
 
 // Screen constants
@@ -15,5 +17,9 @@ constexpr RGB ENEMY_COLOR = {255, 105, 97};
 
 // Enemy constant
 constexpr int MAX_ENEMIES = 5;
+
+// Entity tags
+const std::string PLAYER_TAG = "player";
+const std::string ENEMY_TAG = "enemy";
 
 #endif
