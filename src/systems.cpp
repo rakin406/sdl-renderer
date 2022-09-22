@@ -36,26 +36,26 @@ bool checkCollision(const Position &playerPos, const Position &enemyPos,
  * @param speedX Speed in x-axis.
  * @param speedY Speed in y-axis.
  */
-void moveTowards(Position *pos, Position *target, int speedX, int speedY)
+void moveTowards(Position &pos, Position &target, int speedX, int speedY)
 {
     // Move x-axis position
-    if (pos->x > target->x)
+    if (pos.x > target.x)
     {
-        pos->x -= speedX;
+        pos.x -= speedX;
     }
-    else if (pos->x < target->x)
+    else if (pos.x < target.x)
     {
-        pos->x += speedX;
+        pos.x += speedX;
     }
 
     // Move y-axis position
-    if (pos->y > target->y)
+    if (pos.y > target.y)
     {
-        pos->y -= speedY;
+        pos.y -= speedY;
     }
-    else if (pos->y < target->y)
+    else if (pos.y < target.y)
     {
-        pos->y += speedY;
+        pos.y += speedY;
     }
 }
 
@@ -121,7 +121,7 @@ void System::updatePlayer()
                 }
 
                 // Move towards cursor
-                moveTowards(pos, &mousePos, speedX, speedY);
+                moveTowards(pos, mousePos, speedX, speedY);
             }
         });
 }
@@ -146,7 +146,9 @@ void System::updateEnemies()
                 // Otherwise continue moving
                 else
                 {
-                    moveTowards(pos, this->lastPlayerPos);
+                    // Move enemy towards player
+                    moveTowards(pos, this->lastPlayerPos, ENEMY_SPEED,
+                                ENEMY_SPEED);
                 }
             }
         });
