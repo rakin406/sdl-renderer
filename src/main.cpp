@@ -7,29 +7,19 @@
 #include "../include/systems.h"
 #include "../include/window.h"
 
+void setupEntities(entt::registry *registry);
+
 int main()
 {
     // Initialize SDL window
     Window window;
 
-    // Initialize ECS registry
+    // Create ECS registry and setup entities
     entt::registry registry;
+    setupEntities(&registry);
 
     // Initialize renderer
     Renderer renderer(window.getRendererContext(), &registry);
-
-    // Create player entity and set default player entity position at the center
-    // of the screen.
-    auto player = registry.create();
-    registry.emplace<std::string>(player, "player"); // Player tag
-    registry.emplace<Position>(player, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-
-    // Create enemy entities
-    for (int i = 0; i < MAX_ENEMIES; ++i)
-    {
-        auto enemy = registry.create();
-        registry.emplace<std::string>(enemy, "enemy"); // Enemy tag
-    }
 
     // Initialize ECS systems
     System system(&registry);
@@ -65,4 +55,20 @@ int main()
     window.destroy();
 
     return 0;
+}
+
+void setupEntities(entt::registry *registry)
+{
+    // Create player entity and set default player entity position at the center
+    // of the screen.
+    auto player = registry->create();
+    registry->emplace<std::string>(player, "player"); // Player tag
+    registry->emplace<Position>(player, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+
+    // Create enemy entities
+    for (int i = 0; i < MAX_ENEMIES; ++i)
+    {
+        auto enemy = registry->create();
+        registry->emplace<std::string>(enemy, "enemy"); // Enemy tag
+    }
 }
