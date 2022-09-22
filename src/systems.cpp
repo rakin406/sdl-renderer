@@ -9,8 +9,21 @@
 
 namespace tools
 {
-// TODO: Create definition for this function
-bool checkCollision();
+/**
+ * Check collision between player circle and enemy triangle.
+ *
+ * @param playerPos Player position.
+ * @param enemyPos Enemy position.
+ * @param playerRadius Player circle radius.
+ */
+bool checkCollision(const Position &playerPos, const Position &enemyPos,
+                    int playerRadius)
+{
+    return (enemyPos.x == playerPos.x + playerRadius) ||
+           (enemyPos.x == playerPos.x - playerRadius) ||
+           (enemyPos.y == playerPos.y + playerRadius) ||
+           (enemyPos.y == playerPos.y - playerRadius);
+}
 
 /**
  * Move towards position with a certain speed.
@@ -83,6 +96,9 @@ void System::updatePlayer()
             // Check if tag matches player tag
             if (tag == Tag::Player)
             {
+                // Save last player position
+                this->lastPlayerPos = pos;
+
                 // Get entity and mouse positions
                 struct Position mousePos = tools::player::getMousePosition();
 
@@ -125,6 +141,11 @@ void System::updateEnemies()
             // Check if tag matches enemy tag
             if (tag == Tag::Enemy)
             {
+                // Check if enemy position is equal to last player position
+                if (pos == lastPlayerPos)
+                {
+                }
+
                 // Logic
             }
         });
