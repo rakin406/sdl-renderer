@@ -7,8 +7,11 @@
 #include "../include/constants.h"
 #include "../include/systems.h"
 
-namespace tools
+namespace
 {
+constexpr int PLAYER_SPEED = 20;
+constexpr int ENEMY_SPEED = PLAYER_SPEED + 10;
+
 /**
  * Check collision between player circle and enemy triangle.
  *
@@ -56,11 +59,6 @@ void moveTowards(Position *pos, Position *target, int speedX, int speedY)
     }
 }
 
-namespace player
-{
-
-constexpr int SPEED = 20;
-
 /**
  * Get current mouse position.
  *
@@ -79,8 +77,7 @@ Position getMousePosition()
     return mousePos;
 }
 
-} // namespace player
-} // namespace tools
+} // namespace
 
 System::System(entt::registry *registry) : registry(registry) {}
 
@@ -100,15 +97,15 @@ void System::updatePlayer()
                 this->lastPlayerPos = pos;
 
                 // Get entity and mouse positions
-                struct Position mousePos = tools::player::getMousePosition();
+                struct Position mousePos = getMousePosition();
 
                 // Distance between player and mouse position
                 int distanceX = std::abs(mousePos.x - pos.x);
                 int distanceY = std::abs(mousePos.y - pos.y);
 
                 // Initial player speed
-                int speedX = tools::player::SPEED;
-                int speedY = tools::player::SPEED;
+                int speedX = PLAYER_SPEED;
+                int speedY = PLAYER_SPEED;
 
                 // Set speed as difference in distance for the final x-axis
                 // movement
@@ -124,7 +121,7 @@ void System::updatePlayer()
                 }
 
                 // Move towards cursor
-                tools::moveTowards(pos, &mousePos, speedX, speedY);
+                moveTowards(pos, &mousePos, speedX, speedY);
             }
         });
 }
@@ -142,15 +139,14 @@ void System::updateEnemies()
             if (tag == Tag::Enemy)
             {
                 // Check if enemy collides with player entity
-                if (tools::checkCollision(this->lastPlayerPos, pos,
-                                          PLAYER_RADIUS))
+                if (checkCollision(this->lastPlayerPos, pos, PLAYER_RADIUS))
                 {
                     this->gameOver = true; // Game over
                 }
                 // Otherwise continue moving
                 else
                 {
-                    tools::moveTowards(pos, this->lastPlayerPos);
+                    moveTowards(pos, this->lastPlayerPos);
                 }
             }
         });
