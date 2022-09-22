@@ -1,5 +1,4 @@
 #include <entt/entt.hpp>
-#include <string>
 
 #include "../include/components.h"
 #include "../include/constants.h"
@@ -62,13 +61,13 @@ void setupEntities(entt::registry *registry)
     // Create player entity and set default player entity position at the center
     // of the screen.
     auto player = registry->create();
-    registry->emplace<std::string>(player, PLAYER_TAG); // Player tag
+    registry->emplace<Tag>(player, Tag::Player); // Player tag
     registry->emplace<Position>(player, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
     // Create enemy entities
     for (int i = 0; i < MAX_ENEMIES; ++i)
     {
         auto enemy = registry->create();
-        registry->emplace<std::string>(enemy, ENEMY_TAG); // Enemy tag
+        registry->emplace<Tag>(enemy, Tag::Enemy); // Enemy tag
     }
 }
