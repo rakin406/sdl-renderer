@@ -20,7 +20,7 @@ Renderer::Renderer(SDL_Renderer *renderer, entt::registry *registry)
 void Renderer::drawPlayer()
 {
     // Get registry components
-    auto view = this->registry->view<const std::string, Position>();
+    auto view = this->registry->view<const Tag, Position>();
 
     // Set player circle color
     setRenderColor(this->renderer, PLAYER_COLOR);
@@ -30,7 +30,7 @@ void Renderer::drawPlayer()
         [this](const auto &tag, auto &pos)
         {
             // Check if tag matches player tag
-            if (tag == PLAYER_TAG)
+            if (tag == Tag::Player)
             {
                 // Set player circle position
                 this->playerCircle.centerX = pos.x;
