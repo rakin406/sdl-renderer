@@ -14,7 +14,7 @@ Window::Window()
     SDL_Init(SDL_INIT_VIDEO);
 }
 
-SDL_Renderer *Window::getRendererContext() { return this->renderer; }
+SDL_Renderer *Window::getRendererContext() const { return this->renderer; }
 
 bool Window::isQuitRequested()
 {

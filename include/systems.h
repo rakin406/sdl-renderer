@@ -18,7 +18,7 @@ public:
     void updateEnemies();
 
     // Return true if game is over
-    bool isGameOver() const;
+    [[nodiscard]] bool isGameOver() const;
 
 private:
     const int PLAYER_RADIUS = 40;                  // Default player radius

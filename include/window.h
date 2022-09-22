@@ -9,7 +9,7 @@ public:
     Window();
 
     // Get renderer context
-    SDL_Renderer *getRendererContext();
+    [[nodiscard]] SDL_Renderer *getRendererContext() const;
 
     // Return true if user requests quit
     bool isQuitRequested();
