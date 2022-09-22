@@ -90,7 +90,6 @@ System::System(entt::registry *registry, SDL_Renderer *renderer)
 {
 }
 
-// FIX: Circle doesn't get drawn on screen
 void System::drawPlayer()
 {
     // Get registry components

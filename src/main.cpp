@@ -66,6 +66,7 @@ void setupPlayer(entt::registry *registry)
     // Create player entity and set default player entity position at the center
     // of the screen.
     auto player = registry->create();
+    registry->emplace<Tag>(player, Tag::Player); // Player tag
 
     // Get center screen position
     glm::ivec2 screenCenter = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
