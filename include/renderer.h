@@ -9,25 +9,24 @@
 class Renderer
 {
 public:
-    explicit Renderer(SDL_Renderer *renderer);
-
     /**
-     * Draw player entity on screen.
+     * Default constructor.
      *
+     * @param renderer SDL renderer.
      * @param registry The main registry of ECS.
      */
-    void drawPlayer(entt::registry &registry);
+    explicit Renderer(SDL_Renderer *renderer, entt::registry *registry);
 
-    /**
-     * Draw enemy entities on screen.
-     *
-     * @param registry The main registry of ECS.
-     */
-    void drawEnemies(entt::registry &registry);
+    // Draw player entity on screen.
+    void drawPlayer();
+
+    // Draw enemy entities on screen.
+    void drawEnemies();
 
 private:
     static constexpr int PLAYER_RADIUS = 40;
     SDL_Renderer *renderer = nullptr;
+    entt::registry *registry{};
     Circle playerCircle{};
     Triangle enemyTriangle{};
 };
