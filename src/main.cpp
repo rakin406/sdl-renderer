@@ -50,13 +50,13 @@ int main()
         window.clear();
 
         // Draw player entity
-        renderer.drawPlayer(registry, player);
+        renderer.drawPlayer(registry);
 
         // Draw enemy entity
-        renderer.drawEnemy();
+        // renderer.drawEnemy();
 
         // Update player system
-        system.updatePlayer(player);
+        system.updatePlayer();
 
         // Update screen
         window.update();
