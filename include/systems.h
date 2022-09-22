@@ -12,14 +12,14 @@ public:
      *
      * @param registry The main registry of ECS.
      */
-    void updatePlayer(entt::registry *registry);
+    void updatePlayer(entt::registry &registry);
 
     /**
      * Update enemies and their components.
      *
      * @param registry The main registry of ECS.
      */
-    void updateEnemies(entt::registry *registry);
+    void updateEnemies(entt::registry &registry);
 
 private:
     static constexpr int PLAYER_RADIUS = 40;       // Default player radius
