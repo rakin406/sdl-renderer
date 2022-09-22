@@ -11,8 +11,12 @@ class Renderer
 public:
     explicit Renderer(SDL_Renderer *renderer);
 
-    // Draw player entity on screen
-    void drawPlayer(entt::registry &registry, entt::entity &entity);
+    /**
+     * Draw player entity on screen.
+     *
+     * @param registry The main registry of ECS.
+     */
+    void drawPlayer(entt::registry &registry);
 
     // Draw enemy entity on screen
     void drawEnemy();
