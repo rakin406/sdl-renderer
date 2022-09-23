@@ -110,7 +110,6 @@ void System::drawPlayer()
         });
 }
 
-// TODO: Finish this method
 void System::drawEnemies()
 {
     // Get registry components
@@ -219,9 +218,29 @@ void System::updateEnemies()
                         // screen size. Move enemy towards player
                         moveTowards(triangle.centerPos, this->lastPlayerPos,
                                     ENEMY_SPEED, ENEMY_SPEED);
+                        // TODO: Make this more readable
+                        if (triangle.points[i].x < tail2.x && head.x < tail1.x)
+                        {
+                            SDL_RenderDrawLine(renderer, head.x, head.y,
+                                               tail1.x, tail1.y);
+                            SDL_RenderDrawLine(renderer, tail1.x, tail1.y,
+                                               tail2.x, tail2.y);
+                            SDL_RenderDrawLine(renderer, tail2.x, tail2.y,
+                                               head.x, head.y);
+                        }
+                        else if (head.x > tail2.x && head.x > tail1.x)
+                        {
+                        }
+                        else if (head.y < tail2.y && head.y < tail1.y)
+                        {
+                        }
+                        else if (head.y > tail2.y && head.y > tail1.y)
+                        {
+                        }
                     }
 
                     // TODO: Refactor this
+                    // Don't cross screen boundary
                     if (triangle.points[i].x == 0 ||
                         triangle.points[i].x == SCREEN_WIDTH ||
                         triangle.points[i].y == 0 ||

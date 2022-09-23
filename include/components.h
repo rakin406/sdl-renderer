@@ -20,7 +20,6 @@ struct Circle
 struct Triangle
 {
     std::array<glm::ivec2, 3> points;
-    glm::ivec2 centerPos;
     int size;
 };
 
