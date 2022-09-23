@@ -135,7 +135,7 @@ void System::drawEnemies()
                                       triangle.centerPos.y + triangle.size};
 
                 // Draw enemy triangle
-                drawTriangle(this->renderer, &this->enemyTriangle);
+                drawTriangle(this->renderer, &triangle);
             }
         });
 }

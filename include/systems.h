@@ -43,8 +43,7 @@ private:
     glm::ivec2 lastPlayerPos{};       // Last position of last player
     bool gameOver = false;            // Game over boolean
     SDL_Renderer *renderer = nullptr; // Main renderer
-    Triangle enemyTriangle{};
-    std::random_device dev; // For random number generation
+    std::random_device dev;           // For random number generation
 };
 
 #endif
