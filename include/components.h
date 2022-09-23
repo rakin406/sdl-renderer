@@ -11,16 +11,4 @@ enum class Tag
     Enemy
 };
 
-struct Circle
-{
-    glm::ivec2 centerPos;
-    int radius; // Radius of the circle
-};
-
-struct Triangle
-{
-    std::array<glm::ivec2, 3> points;
-    int size;
-};
-
 #endif

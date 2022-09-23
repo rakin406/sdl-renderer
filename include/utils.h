@@ -2,15 +2,26 @@
 #define UTILS_H
 
 #include <SDL2/SDL.h>
+#include <array>
 #include <glm/vec2.hpp>
-
-#include "components.h"
 
 struct RGB
 {
     int red;
     int green;
     int blue;
+};
+
+struct Circle
+{
+    glm::ivec2 centerPos;
+    int radius; // Radius of the circle
+};
+
+struct Triangle
+{
+    std::array<glm::ivec2, 3> points;
+    int size;
 };
 
 /**
