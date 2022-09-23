@@ -1,6 +1,5 @@
 [requires]
 sdl/2.24.0
-entt/3.10.3
 glm/cci.20220420
 
 [generators]
