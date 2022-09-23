@@ -4,6 +4,9 @@
 #include "../include/utils.h"
 #include "../include/window.h"
 
+constexpr char SCREEN_TITLE[] = "Avoid me";
+constexpr RGB SCREEN_COLOR = {253, 248, 150};
+
 Window::Window()
     : window(SDL_CreateWindow(SCREEN_TITLE, SDL_WINDOWPOS_UNDEFINED,
                               SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,

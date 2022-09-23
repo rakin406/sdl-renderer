@@ -12,11 +12,10 @@
 
 namespace
 {
+constexpr RGB PLAYER_COLOR = {119, 221, 119};
+constexpr RGB ENEMY_COLOR = {255, 105, 97};
 constexpr int PLAYER_SPEED = 20;
 constexpr int ENEMY_SPEED = PLAYER_SPEED + 10;
-
-// Equilateral triangle side length for enemy entity
-constexpr int TRIANGLE_SIDE_LENGTH = 5;
 
 /**
  * Check collision between player circle and enemy triangle.
@@ -115,23 +114,25 @@ void System::drawPlayer()
 void System::drawEnemies()
 {
     // Get registry components
-    auto view = this->registry->view<const Tag, glm::ivec2>();
+    auto view = this->registry->view<const Tag, Triangle>();
 
     // Set enemy triangle color
     setRenderColor(this->renderer, ENEMY_COLOR);
 
     // Loop components
     view.each(
-        [this](const auto &tag, auto &pos)
+        [this](const auto &tag, auto &triangle)
         {
             // Check if tag matches enemy tag
             if (tag == Tag::Enemy)
             {
-                // TODO: Finish this
                 // Set enemy triangle position
-                this->enemyTriangle.points[0] = {pos.x - 20, pos.y + 20};
-                this->enemyTriangle.points[1] = {pos.x, pos.y - 20};
-                this->enemyTriangle.points[2] = {pos.x + 20, pos.y + 20};
+                triangle.points[0] = {triangle.centerPos.x - triangle.size,
+                                      triangle.centerPos.y + triangle.size};
+                triangle.points[1] = {triangle.centerPos.x,
+                                      triangle.centerPos.y - triangle.size};
+                triangle.points[2] = {triangle.centerPos.x + triangle.size,
+                                      triangle.centerPos.y + triangle.size};
 
                 // Draw enemy triangle
                 drawTriangle(this->renderer, &this->enemyTriangle);
@@ -190,37 +191,45 @@ void System::updatePlayer()
 void System::updateEnemies()
 {
     // Get registry components
-    auto view = this->registry->view<const Tag, glm::ivec2>();
+    auto view = this->registry->view<const Tag, Triangle>();
 
     // Loop components
     view.each(
-        [this](const auto &tag, auto &pos)
+        [this](const auto &tag, auto &triangle)
         {
             // Check if tag matches enemy tag
             if (tag == Tag::Enemy)
             {
-                // Check if enemy collides with player entity
-                if (checkCollision(this->lastPlayerPos, pos, PLAYER_RADIUS))
+                // 3 triangle points
+                for (int i = 0; i < 3; ++i)
                 {
-                    this->gameOver = true; // Game over
-                }
-                // Otherwise continue moving
-                else
-                {
-                    // TODO: Instead of moving towards the player. Save the last
-                    // player position and POINT the triangle angle towards the
-                    // player and move STRAIGHT until the end of screen size.
-                    // Move enemy towards player
-                    moveTowards(pos, this->lastPlayerPos, ENEMY_SPEED,
-                                ENEMY_SPEED);
-                }
 
-                // TODO: Refactor this
-                if (pos.x == 0 || pos.x == SCREEN_WIDTH || pos.y == 0 ||
-                    pos.y == SCREEN_HEIGHT)
-                {
-                    // Reset position
-                    pos = this->getRandomPosition();
+                    // Check if enemy collides with player entity
+                    if (checkCollision(this->lastPlayerPos, triangle.points[i],
+                                       PLAYER_RADIUS))
+                    {
+                        this->gameOver = true; // Game over
+                    }
+                    // Otherwise continue moving
+                    else
+                    {
+                        // TODO: Instead of moving towards the player. Save the
+                        // last player position and POINT the triangle angle
+                        // towards the player and move STRAIGHT until the end of
+                        // screen size. Move enemy towards player
+                        moveTowards(triangle.centerPos, this->lastPlayerPos,
+                                    ENEMY_SPEED, ENEMY_SPEED);
+                    }
+
+                    // TODO: Refactor this
+                    if (triangle.points[i].x == 0 ||
+                        triangle.points[i].x == SCREEN_WIDTH ||
+                        triangle.points[i].y == 0 ||
+                        triangle.points[i].y == SCREEN_HEIGHT)
+                    {
+                        // Reset position
+                        triangle.centerPos = this->getRandomPosition();
+                    }
                 }
             }
         });

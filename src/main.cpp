@@ -1,3 +1,4 @@
+#include <array>
 #include <entt/entt.hpp>
 #include <glm/vec2.hpp>
 
@@ -5,6 +6,9 @@
 #include "../include/constants.h"
 #include "../include/systems.h"
 #include "../include/window.h"
+
+constexpr int TRIANGLE_SIZE = 40; // For enemies
+constexpr int MAX_ENEMIES = 5;
 
 // These functions are for initializing entities and are out of main loop
 void setupPlayer(entt::registry *registry);
@@ -82,7 +86,9 @@ void setupEnemies(entt::registry *registry, System &system)
     {
         auto enemy = registry->create();
         registry->emplace<Tag>(enemy, Tag::Enemy); // Enemy tag
-        registry->emplace<glm::ivec2>(enemy, system.getRandomPosition());
+        std::array<glm::ivec2, 3> blankPoints = {};
+        registry->emplace<Triangle>(enemy, blankPoints,
+                                    system.getRandomPosition(), TRIANGLE_SIZE);
     }
 }
 
