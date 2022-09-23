@@ -13,7 +13,7 @@ int main()
     while (run)
     {
         // Stop loop if user requests quit
-        if (Window::isQuitRequested())
+        if (window.isQuitRequested())
         {
             run = false;
         }
