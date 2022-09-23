@@ -1,2 +1,2 @@
-# avoid-me
-A game where you avoid your cursor from shapes or die
+# Custom SDL renderer
+A custom SDL renderer I made.
