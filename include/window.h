@@ -22,7 +22,7 @@ class Window
 {
 public:
     /**
-     * Default constructor for Window.
+     * @brief Default constructor for Window.
      *
      * @param title Window title.
      * @param width Window width.
@@ -44,13 +44,21 @@ public:
         SDL_Init(SDL_INIT_VIDEO);
     }
 
-    // Get renderer context
+    /**
+     * @brief Get renderer context.
+     *
+     * @return SDL_Renderer*
+     */
     [[nodiscard]] SDL_Renderer *getRendererContext() const
     {
         return this->renderer;
     }
 
-    // Return true if user requests quit. For use in main loop.
+    /**
+     * @brief Return true if user requests quit. For use in main loop.
+     *
+     * @return boolean.
+     */
     bool isQuitRequested()
     {
         SDL_Event event;
@@ -78,7 +86,7 @@ public:
 
     // FIX: Screen color is transparent
     /**
-     * Clear screen with background color. Default is white.
+     * @brief Clear screen with background color. Default is white.
      *
      * @param red Default = 255
      * @param green Default = 255
@@ -93,7 +101,7 @@ public:
     }
 
     /**
-     * Set color for next render. Default is black.
+     * @brief Set color for next render. Default is black.
      *
      * @param red Default = 0
      * @param green Default = 0
@@ -106,7 +114,7 @@ public:
     }
 
     /**
-     * Draw circle on screen.
+     * @brief Draw circle on screen.
      *
      * @param circle Circle structure.
      */
@@ -132,7 +140,7 @@ public:
     }
 
     /**
-     * Draw triangle on screen.
+     * @brief Draw triangle on screen.
      *
      * @param triangle Triangle structure.
      */
@@ -153,10 +161,14 @@ public:
                            point1.y);
     }
 
-    // Update screen
+    /**
+     * @brief Update screen.
+     */
     void update() { SDL_RenderPresent(this->renderer); }
 
-    // Kill and exit window
+    /**
+     * @brief Kill and exit window.
+     */
     void destroy()
     {
         SDL_DestroyRenderer(this->renderer);
