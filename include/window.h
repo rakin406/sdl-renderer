@@ -76,6 +76,7 @@ public:
         return false;
     }
 
+    // FIX: Screen color is transparent
     /**
      * Clear screen with background color. Default is white.
      *
