@@ -4,20 +4,12 @@
 #include <SDL2/SDL.h>
 #include <array>
 #include <glm/vec2.hpp>
-
-#include "constants.h"
-
-struct RGB
-{
-    int red;
-    int green;
-    int blue;
-};
+#include <string>
 
 struct Circle
 {
     glm::ivec2 centerPos;
-    int radius; // Radius of the circle
+    int radius;
 };
 
 struct Triangle
@@ -26,20 +18,29 @@ struct Triangle
     int size;
 };
 
-constexpr char SCREEN_TITLE[] = "Avoid me";
-constexpr RGB SCREEN_COLOR = {253, 248, 150};
-
 class Window
 {
 public:
-    Window()
+    /**
+     * Default constructor for Window.
+     *
+     * @param title Window title.
+     * @param width Window width.
+     * @param height Window height.
+     */
+    Window(const std::string &title, int width, int height)
     {
-        SDL_CreateWindow(SCREEN_TITLE, SDL_WINDOWPOS_UNDEFINED,
-                         SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT,
+        // Initialize window
+        SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
+                         SDL_WINDOWPOS_UNDEFINED, width, height,
                          SDL_WINDOW_SHOWN);
-        SDL_CreateRenderer(
-            window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
+        // Initialize renderer
+        SDL_CreateRenderer(this->window, -1,
+                           SDL_RENDERER_ACCELERATED |
+                               SDL_RENDERER_PRESENTVSYNC);
+
+        // Initialize SDL
         SDL_Init(SDL_INIT_VIDEO);
     }
 
@@ -49,7 +50,7 @@ public:
         return this->renderer;
     }
 
-    // Return true if user requests quit
+    // Return true if user requests quit. For use in main loop.
     bool isQuitRequested()
     {
         SDL_Event event;
@@ -64,7 +65,7 @@ public:
 
             if (event.type == SDL_KEYDOWN)
             {
-                // Quit on Escape
+                // Detect quit on Escape
                 if (event.key.keysym.sym == SDLK_ESCAPE)
                 {
                     return true;
@@ -75,38 +76,44 @@ public:
         return false;
     }
 
-    // Clear screen with background color
-    void clear()
+    /**
+     * Clear screen with background color. Default is white.
+     *
+     * @param red Default = 255
+     * @param green Default = 255
+     * @param blue Default = 255
+     */
+    void clear(Uint8 red = 255, Uint8 green = 255, Uint8 blue = 255)
     {
         // Set background color
-        setRenderColor(this->renderer, SCREEN_COLOR);
+        setRenderColor(red, green, blue);
         // Clear screen
         SDL_RenderClear(this->renderer);
     }
 
     /**
-     * Set color for next render.
+     * Set color for next render. Default is black.
      *
-     * @param renderer SDL renderer.
-     * @param color Render color.
+     * @param red Default = 0
+     * @param green Default = 0
+     * @param blue Default = 0
      */
-    void setRenderColor(SDL_Renderer *renderer, const RGB &color)
+    void setRenderColor(Uint8 red = 0, Uint8 green = 0, Uint8 blue = 0)
     {
-        const auto &[r, g, b] = color;
-        SDL_SetRenderDrawColor(renderer, r, g, b, SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(this->renderer, red, green, blue,
+                               SDL_ALPHA_OPAQUE);
     }
 
     /**
      * Draw circle on screen.
      *
-     * @param renderer SDL renderer.
      * @param circle Circle structure.
      */
-    void drawCircle(SDL_Renderer *renderer, const Circle *circle)
+    void drawCircle(const Circle &circle)
     {
         // Get circle properties
-        glm::ivec2 centerPos = circle->centerPos;
-        int radius = circle->radius;
+        glm::ivec2 centerPos = circle.centerPos;
+        int radius = circle.radius;
 
         for (int w = 0; w < radius * 2; ++w)
         {
@@ -116,7 +123,7 @@ public:
                 int dy = radius - h; // vertical offset
                 if ((dx * dx + dy * dy) <= (radius * radius))
                 {
-                    SDL_RenderDrawPoint(renderer, centerPos.x + dx,
+                    SDL_RenderDrawPoint(this->renderer, centerPos.x + dx,
                                         centerPos.y + dy);
                 }
             }
@@ -126,21 +133,23 @@ public:
     /**
      * Draw triangle on screen.
      *
-     * @param renderer SDL renderer.
      * @param triangle Triangle structure.
      */
-    void drawTriangle(SDL_Renderer *renderer, const Triangle *triangle)
+    void drawTriangle(const Triangle &triangle)
     {
-        // Get triangle properties
-        glm::ivec2 point1 = triangle->points[0];
-        glm::ivec2 point2 = triangle->points[1];
-        glm::ivec2 point3 = triangle->points[2];
+        // Get triangle points
+        glm::ivec2 point1 = triangle.points[0];
+        glm::ivec2 point2 = triangle.points[1];
+        glm::ivec2 point3 = triangle.points[2];
 
         // TODO: Fill the triangle with color
         // Draw line up to points
-        SDL_RenderDrawLine(renderer, point1.x, point1.y, point2.x, point2.y);
-        SDL_RenderDrawLine(renderer, point2.x, point2.y, point3.x, point3.y);
-        SDL_RenderDrawLine(renderer, point3.x, point3.y, point1.x, point1.y);
+        SDL_RenderDrawLine(this->renderer, point1.x, point1.y, point2.x,
+                           point2.y);
+        SDL_RenderDrawLine(this->renderer, point2.x, point2.y, point3.x,
+                           point3.y);
+        SDL_RenderDrawLine(this->renderer, point3.x, point3.y, point1.x,
+                           point1.y);
     }
 
     // Update screen

@@ -1,10 +1,15 @@
-#include "../include/constants.h"
+#include <string>
+
 #include "../include/window.h"
+
+// Screen constants
+constexpr int SCREEN_WIDTH = 1000;
+constexpr int SCREEN_HEIGHT = 750;
 
 int main()
 {
     // Initialize SDL window
-    Window window;
+    Window window("Example", SCREEN_WIDTH, SCREEN_HEIGHT);
 
     // Event loop run flag
     bool run = true;
@@ -18,7 +23,7 @@ int main()
             run = false;
         }
 
-        // Clear screen with background color
+        // Clear screen with background color which is white by default
         window.clear();
 
         // ----------Draw or update stuff here-----------
@@ -27,7 +32,7 @@ int main()
         window.update();
     }
 
-    // Quit game
+    // Quit window
     window.destroy();
 
     return 0;
