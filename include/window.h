@@ -1,9 +1,10 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <SDL2/SDL.h>
-#include <array>
 #include <glm/vec2.hpp>
+#include <SDL2/SDL.h>
+
+#include <array>
 #include <string>
 
 struct Circle

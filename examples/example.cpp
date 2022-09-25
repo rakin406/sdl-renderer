@@ -1,6 +1,6 @@
-#include <string>
-
 #include "../include/window.h"
+
+#include <string>
 
 namespace
 {
