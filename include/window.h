@@ -61,7 +61,7 @@ public:
      */
     bool isQuitRequested()
     {
-        SDL_Event event;
+        SDL_Event event {};
 
         // Check for events
         while (SDL_PollEvent(&event) != 0)
@@ -121,8 +121,8 @@ public:
     void drawCircle(const Circle &circle)
     {
         // Get circle properties
-        glm::ivec2 centerPos = circle.centerPos;
-        int radius = circle.radius;
+        glm::ivec2 centerPos { circle.centerPos };
+        int radius { circle.radius };
 
         for (int w = 0; w < radius * 2; ++w)
         {
@@ -147,9 +147,9 @@ public:
     void drawTriangle(const Triangle &triangle)
     {
         // Get triangle points
-        glm::ivec2 point1 = triangle.points[0];
-        glm::ivec2 point2 = triangle.points[1];
-        glm::ivec2 point3 = triangle.points[2];
+        glm::ivec2 point1 { triangle.points[0] };
+        glm::ivec2 point2 { triangle.points[1] };
+        glm::ivec2 point3 { triangle.points[2] };
 
         // TODO: Fill the triangle with color
         // Draw line up to points
@@ -177,8 +177,8 @@ public:
     }
 
 private:
-    SDL_Window *window = nullptr;
-    SDL_Renderer *renderer = nullptr;
+    SDL_Window *window { nullptr };
+    SDL_Renderer *renderer { nullptr };
 };
 
 #endif

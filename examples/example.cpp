@@ -2,9 +2,12 @@
 
 #include "../include/window.h"
 
+namespace
+{
 // Screen constants
-constexpr int SCREEN_WIDTH = 1000;
-constexpr int SCREEN_HEIGHT = 750;
+constexpr int SCREEN_WIDTH { 1000 };
+constexpr int SCREEN_HEIGHT { 750 };
+} // namespace
 
 int main()
 {
@@ -12,7 +15,7 @@ int main()
     Window window("Example", SCREEN_WIDTH, SCREEN_HEIGHT);
 
     // Event loop run flag
-    bool run = true;
+    bool run { true };
 
     // Event loop
     while (run)
