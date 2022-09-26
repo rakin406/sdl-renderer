@@ -114,7 +114,7 @@ public:
      *
      * @param circle Circle structure.
      */
-    void drawCircle(const Circle &circle)
+    void drawCircle(const Circle& circle)
     {
         // Get circle properties
         glm::ivec2 centerPos { circle.centerPos };
@@ -140,7 +140,7 @@ public:
      *
      * @param triangle Triangle structure.
      */
-    void drawTriangle(const Triangle &triangle)
+    void drawTriangle(const Triangle& triangle)
     {
         glm::ivec2 point1 { triangle.points[0] };
         glm::ivec2 point2 { triangle.points[1] };
