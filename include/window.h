@@ -121,9 +121,9 @@ public:
         glm::ivec2 centerPos { circle.centerPos };
         int radius { circle.radius };
 
-        for (int w = 0; w < radius * 2; ++w)
+        for (int w { 0 }; w < radius * 2; ++w)
         {
-            for (int h = 0; h < radius * 2; ++h)
+            for (int h { 0 }; h < radius * 2; ++h)
             {
                 int dx = radius - w; // horizontal offset
                 int dy = radius - h; // vertical offset
