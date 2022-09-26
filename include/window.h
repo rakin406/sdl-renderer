@@ -35,7 +35,7 @@ public:
                          SDL_WINDOWPOS_UNDEFINED, width, height,
                          SDL_WINDOW_SHOWN);
 
-        SDL_CreateRenderer(this->window, -1,
+        SDL_CreateRenderer(m_pWindow, -1,
                            SDL_RENDERER_ACCELERATED |
                                SDL_RENDERER_PRESENTVSYNC);
 
@@ -49,7 +49,7 @@ public:
      */
     [[nodiscard]] SDL_Renderer *getRendererContext() const
     {
-        return this->renderer;
+        return m_pRenderer;
     }
 
     /**
@@ -95,7 +95,7 @@ public:
         // Set background color
         setRenderColor(red, green, blue);
         // Clear screen
-        SDL_RenderClear(this->renderer);
+        SDL_RenderClear(m_pRenderer);
     }
 
     /**
@@ -107,8 +107,7 @@ public:
      */
     void setRenderColor(Uint8 red = 0, Uint8 green = 0, Uint8 blue = 0)
     {
-        SDL_SetRenderDrawColor(this->renderer, red, green, blue,
-                               SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(m_pRenderer, red, green, blue, SDL_ALPHA_OPAQUE);
     }
 
     /**
@@ -130,7 +129,7 @@ public:
                 int dy = radius - h; // vertical offset
                 if ((dx * dx + dy * dy) <= (radius * radius))
                 {
-                    SDL_RenderDrawPoint(this->renderer, centerPos.x + dx,
+                    SDL_RenderDrawPoint(m_pRenderer, centerPos.x + dx,
                                         centerPos.y + dy);
                 }
             }
@@ -150,32 +149,29 @@ public:
 
         // TODO: Fill the triangle with color
         // Draw line up to points
-        SDL_RenderDrawLine(this->renderer, point1.x, point1.y, point2.x,
-                           point2.y);
-        SDL_RenderDrawLine(this->renderer, point2.x, point2.y, point3.x,
-                           point3.y);
-        SDL_RenderDrawLine(this->renderer, point3.x, point3.y, point1.x,
-                           point1.y);
+        SDL_RenderDrawLine(m_pRenderer, point1.x, point1.y, point2.x, point2.y);
+        SDL_RenderDrawLine(m_pRenderer, point2.x, point2.y, point3.x, point3.y);
+        SDL_RenderDrawLine(m_pRenderer, point3.x, point3.y, point1.x, point1.y);
     }
 
     /**
      * @brief Update screen.
      */
-    void update() { SDL_RenderPresent(this->renderer); }
+    void update() { SDL_RenderPresent(m_pRenderer); }
 
     /**
      * @brief Kill and exit window.
      */
     void destroy()
     {
-        SDL_DestroyRenderer(this->renderer);
-        SDL_DestroyWindow(this->window);
+        SDL_DestroyRenderer(m_pRenderer);
+        SDL_DestroyWindow(m_pWindow);
         SDL_Quit();
     }
 
 private:
-    SDL_Window *window { nullptr };
-    SDL_Renderer *renderer { nullptr };
+    SDL_Window *m_pWindow { nullptr };
+    SDL_Renderer *m_pRenderer { nullptr };
 };
 
 #endif
