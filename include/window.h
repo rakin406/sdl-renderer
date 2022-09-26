@@ -31,17 +31,14 @@ public:
      */
     Window(std::string_view title, int width, int height)
     {
-        // Initialize window
         SDL_CreateWindow(title.data(), SDL_WINDOWPOS_UNDEFINED,
                          SDL_WINDOWPOS_UNDEFINED, width, height,
                          SDL_WINDOW_SHOWN);
 
-        // Initialize renderer
         SDL_CreateRenderer(this->window, -1,
                            SDL_RENDERER_ACCELERATED |
                                SDL_RENDERER_PRESENTVSYNC);
 
-        // Initialize SDL
         SDL_Init(SDL_INIT_VIDEO);
     }
 
@@ -147,7 +144,6 @@ public:
      */
     void drawTriangle(const Triangle &triangle)
     {
-        // Get triangle points
         glm::ivec2 point1 { triangle.points[0] };
         glm::ivec2 point2 { triangle.points[1] };
         glm::ivec2 point3 { triangle.points[2] };

@@ -11,16 +11,11 @@ constexpr int SCREEN_HEIGHT { 750 };
 
 int main()
 {
-    // Initialize SDL window
     Window window("Example", SCREEN_WIDTH, SCREEN_HEIGHT);
-
-    // Event loop run flag
     bool run { true };
 
-    // Event loop
     while (run)
     {
-        // Stop loop if user requests quit
         if (window.isQuitRequested())
         {
             run = false;
@@ -31,11 +26,9 @@ int main()
 
         // ----------Draw or update stuff here-----------
 
-        // Update screen
         window.update();
     }
 
-    // Quit window
     window.destroy();
 
     return 0;
