@@ -5,7 +5,7 @@
 #include <SDL2/SDL.h>
 
 #include <array>
-#include <string>
+#include <string_view>
 
 struct Circle
 {
@@ -29,10 +29,10 @@ public:
      * @param width Window width.
      * @param height Window height.
      */
-    Window(const std::string &title, int width, int height)
+    Window(std::string_view title, int width, int height)
     {
         // Initialize window
-        SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
+        SDL_CreateWindow(title.data(), SDL_WINDOWPOS_UNDEFINED,
                          SDL_WINDOWPOS_UNDEFINED, width, height,
                          SDL_WINDOW_SHOWN);
 
