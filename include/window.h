@@ -3,7 +3,6 @@
 
 #include <glm/vec2.hpp>
 #include <SDL2/SDL.h>
-
 #include <array>
 #include <string_view>
 
