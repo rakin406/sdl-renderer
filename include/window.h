@@ -46,7 +46,7 @@ public:
      *
      * @return SDL_Renderer*
      */
-    [[nodiscard]] SDL_Renderer *getRendererContext() const
+    [[nodiscard]] SDL_Renderer* getRendererContext() const
     {
         return m_pRenderer;
     }
@@ -169,8 +169,8 @@ public:
     }
 
 private:
-    SDL_Window *m_pWindow { nullptr };
-    SDL_Renderer *m_pRenderer { nullptr };
+    SDL_Window* m_pWindow { nullptr };
+    SDL_Renderer* m_pRenderer { nullptr };
 };
 
 #endif

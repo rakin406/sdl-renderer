@@ -10,3 +10,4 @@ Cpp11BracedListStyle: false
 SpaceBeforeCpp11BracedList: true
 SortIncludes: Never
 ReferenceAlignment: Left
+PointerAlignment: Left
