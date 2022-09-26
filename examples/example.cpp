@@ -5,14 +5,14 @@
 namespace
 {
 // Screen constants
-constexpr int SCREEN_WIDTH { 1000 };
-constexpr int SCREEN_HEIGHT { 750 };
+constexpr int kScreenWidth { 1000 };
+constexpr int kScreenHeight { 750 };
 } // namespace
 
 int main()
 {
     // Initialize SDL window
-    Window window("Example", SCREEN_WIDTH, SCREEN_HEIGHT);
+    Window window("Example", kScreenWidth, kScreenHeight);
 
     // Event loop run flag
     bool run { true };
