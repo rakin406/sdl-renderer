@@ -11,7 +11,7 @@ constexpr int SCREEN_HEIGHT{ 750 };
 
 int main()
 {
-    Window window("Example", SCREEN_WIDTH, SCREEN_HEIGHT);
+    Window window{ "Example", SCREEN_WIDTH, SCREEN_HEIGHT };
     bool run{ true };
 
     while (run)
