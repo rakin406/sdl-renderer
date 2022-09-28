@@ -9,12 +9,13 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # Build type flags
-set(CMAKE_CXX_FLAGS_DEBUG "-g3 -fstack-protector-all")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -fdelete-null-pointer-checks")
+set(CMAKE_CXX_FLAGS_DEBUG "-g3")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Load module for speeding up builds
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -39,5 +40,5 @@ if (MSVC)
     add_compile_options(/W4 /Wx)
 else()
     # Lots of warnings and warnings as errors
-    add_compile_options(-Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -Werror)
+    add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
