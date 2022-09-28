@@ -14,7 +14,6 @@ the game project and here we are :)
 ### Dependencies
 
 * GCC/Clang
-* Conan
 * CMake
 * Ninja
 
@@ -27,7 +26,6 @@ the game project and here we are :)
 ```bash
 git clone https://github.com/rakin406/sdl-renderer.git && cd sdl-renderer
 mkdir build && cd build
-conan install .. --build=missing
 cmake .. -G Ninja
 ninja
 ./bin/example
