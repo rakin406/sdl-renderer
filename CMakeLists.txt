@@ -16,6 +16,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -fdelete-null-pointer-checks")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Load module for speeding up builds
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+include(cotire)
+
 # Add dependencies
 include(cmake/CPM.cmake)
 CPMAddPackage(
@@ -28,6 +32,7 @@ CPMAddPackage(
 add_executable(example examples/example.cpp)
 target_include_directories(example PRIVATE include)
 target_link_libraries(example SDL2main SDL2)
+cotire(example)
 
 if (MSVC)
     # Warning level 4 and warnings as errors
