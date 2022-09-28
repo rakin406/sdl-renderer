@@ -28,7 +28,7 @@ git clone https://github.com/rakin406/sdl-renderer.git && cd sdl-renderer
 mkdir build && cd build
 cmake .. -G Ninja
 ninja
-./bin/example
+./example
 ```
 
 ## Author
