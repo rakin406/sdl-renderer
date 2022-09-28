@@ -4,9 +4,9 @@
 
 namespace
 {
-// Screen constants
-constexpr int SCREEN_WIDTH{ 1000 };
-constexpr int SCREEN_HEIGHT{ 750 };
+    // Screen constants
+    constexpr int SCREEN_WIDTH{ 1000 };
+    constexpr int SCREEN_HEIGHT{ 750 };
 } // namespace
 
 int main()
